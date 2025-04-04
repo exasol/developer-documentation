@@ -31,6 +31,7 @@ jobs:
         uses: exasol/python-toolbox/.github/actions/python-environment@0.21.0
         with:
           python-version: ${{ matrix.python-version }}
+          poetry-version: 2.0.1
 
       - name: Run Tests and Collect Coverage
         run: poetry run nox -s test:integration -- -- --coverage --db-version ${{ matrix.exasol-version }}
