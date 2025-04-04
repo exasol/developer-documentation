@@ -7,4 +7,3 @@ from exasol.toolbox.nox.tasks import *
 nox.options.sessions = ["project:fix"]
 
 from debug_python_toolbox import report
-
