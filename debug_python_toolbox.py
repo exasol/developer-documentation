@@ -1,17 +1,22 @@
-import nox
-
-# imports from PTB
-from typing import Optional, Union
 import datetime
-from pathlib import Path
-from exasol.toolbox.metrics import Report
 import json
-from tempfile import TemporaryDirectory
-from nox import Session
 
 # new imports
 import subprocess
 import sys
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+# imports from PTB
+from typing import (
+    Optional,
+    Union,
+)
+
+import nox
+from exasol.toolbox.metrics import Report
+from nox import Session
+
 
 def total_coverage(file: Union[str, Path]) -> float:
     with TemporaryDirectory() as tmpdir:
