@@ -142,4 +142,9 @@ doc/api
 itde/
 
 # Emacs
-TAGS
+/TAGS
+
+# PTB
+/.lint.json
+/.lint.txt
+/.security.json
