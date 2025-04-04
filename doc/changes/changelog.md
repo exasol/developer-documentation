@@ -1,4 +1,4 @@
-# Changelog
+# Changes
 
 * [unreleased](unreleased.md)
 
@@ -7,3 +7,4 @@
 hidden:
 ---
 unreleased
+```

@@ -1,0 +1,18 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - '**'
+
+jobs:
+
+  check-tag-version-job:
+    name: Check Release Tag
+    uses: ./.github/workflows/check-release-tag.yml
+
+  publish-docs:
+    needs: [ cd-job ]
+    name: Publish Documentation
+    uses: ./.github/workflows/gh-pages.yml
+
