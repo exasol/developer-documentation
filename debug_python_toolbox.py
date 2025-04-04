@@ -14,7 +14,13 @@ from typing import (
 )
 
 import nox
-from exasol.toolbox.metrics import Report
+from exasol.toolbox.metrics import (
+    Report,
+    maintainability,
+    reliability,
+    security,
+    technical_debt,
+)
 from nox import Session
 
 
@@ -53,7 +59,6 @@ def create_report(
     pylint_report: Union[str, Path] = ".lint.txt",
     bandit_report: Union[str, Path] = ".security.json",
 ) -> Report:
-    return total_coverage(coverage_report)
     return Report(
         commit=commit,
         date=date if date is not None else datetime.datetime.now(),
