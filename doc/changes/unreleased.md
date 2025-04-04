@@ -1,9 +1,7 @@
 # Unreleased
 
-## Features
 
-* #1: Added initial Project Setup
-
+## Summary
 
 Findings in `report.yml`, columns: 
 * DEVDOC: whether the resp. finding affects the repository developer-documentation, 
@@ -15,3 +13,13 @@ Findings in `report.yml`, columns:
 | Step "Generate GitHub Summary", `poetry run -- coverage report --format markdown` | must ignore coverage error due to no data | Y | Y | Y |
 | Step "Copy Artifacts into Root Folder" | copies 2x `.lint.txt` but must copy `.lint.json`, too | Y | - | Y |
 | Step "Generate GitHub Summary" | contains 2x security, but must be 1x lint and 1x security | Y | - | - |
+
+
+## Features
+
+* #1: Added initial Project Setup
+
+## Bug Fixes
+
+* Fixed findings described above
+
