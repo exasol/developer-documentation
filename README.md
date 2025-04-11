@@ -33,7 +33,7 @@ It is slightly different when connecting to a SaaS database as we need a [person
 ```python
 import pyexasol
 
-C = pyexasol.connect(dsn='<host:port>', user='sys', refresh_token='<token>')
+C = pyexasol.connect(dsn='<host:port>', user='sys', password='<token>')
 ```
 Finally you can also wrap all credentials into a [local config file](https://exasol.github.io/pyexasol/master/user_guide/local_config.html):
 ```python
