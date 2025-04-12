@@ -14,4 +14,5 @@ Documentation and resources for data scientists and programmatic users to perfor
    environments
    integrations
    faq
+   how_edit_this_docu
    changes/changelog
