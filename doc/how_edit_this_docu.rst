@@ -8,7 +8,7 @@ Requirements
 ............
 
 - Python >= 3.9
-- `Poetry`_ >= 2.0
+- `Poetry`_ >= 2.1
 
 Preparations
 ............
