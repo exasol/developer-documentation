@@ -88,7 +88,10 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
-<li><a class="reference internal" href="#csv-files">CSV Files</a></li>
+<li><a class="reference internal" href="#importing-csv-from-aws-s3-into-exasol">Importing CSV from AWS S3 into Exasol</a></li>
+<li><a class="reference internal" href="#step-1-create-a-virtual-schema-connection">Step 1: Create a Virtual Schema Connection</a></li>
+<li><a class="reference internal" href="#step-2-create-a-table">Step 2: Create a Table</a></li>
+<li><a class="reference internal" href="#step-3-import-data">Step 3: Import Data</a></li>
 <li><a class="reference internal" href="#parquet-files">Parquet Files</a></li>
 <li><a class="reference internal" href="#import-from-external-sources">Import from external sources</a></li>
 <li><a class="reference internal" href="#http-transport">HTTP Transport</a></li>
@@ -123,8 +126,51 @@ data-aria-dark="Switch to auto color mode">
         <article class="yue" role="main">
           <section id="data-ingestion">
 <h1>Data Ingestion<a class="headerlink" href="#data-ingestion" title="Link to this heading">¶</a></h1>
-<section id="csv-files">
-<h2>CSV Files<a class="headerlink" href="#csv-files" title="Link to this heading">¶</a></h2>
+<section id="importing-csv-from-aws-s3-into-exasol">
+<h2>Importing CSV from AWS S3 into Exasol<a class="headerlink" href="#importing-csv-from-aws-s3-into-exasol" title="Link to this heading">¶</a></h2>
+<p>This example demonstrates how to import a CSV file from AWS S3 into Exasol using the <cite>IMPORT FROM CSV</cite> command.</p>
+</section>
+<section id="step-1-create-a-virtual-schema-connection">
+<h2>Step 1: Create a Virtual Schema Connection<a class="headerlink" href="#step-1-create-a-virtual-schema-connection" title="Link to this heading">¶</a></h2>
+<p>Establish a connection to your AWS S3 bucket using your AWS credentials:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">CREATE</span><span class="w"> </span><span class="k">CONNECTION</span><span class="w"> </span><span class="n">S3_MY_BUCKET</span>
+</span><span data-line="2"><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;http://&lt;my_bucketname&gt;.s3.&lt;my_region&gt;.amazonaws.com&#39;</span>
+</span><span data-line="3"><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;&lt;my_access_key&gt;&#39;</span>
+</span><span data-line="4"><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;&lt;my_secret_key&gt;&#39;</span><span class="p">;</span>
+</span></pre></div>
+</div>
+</section>
+<section id="step-2-create-a-table">
+<h2>Step 2: Create a Table<a class="headerlink" href="#step-2-create-a-table" title="Link to this heading">¶</a></h2>
+<p>Define the structure of the target table where the data from the CSV file will be stored:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sales_data</span><span class="w"> </span><span class="p">(</span>
+</span><span data-line="2"><span class="w">    </span><span class="n">order_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">    </span><span class="n">product_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+</span><span data-line="4"><span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="n">price</span><span class="w"> </span><span class="n">DOUBLE</span>
+</span><span data-line="6"><span class="p">);</span>
+</span></pre></div>
+</div>
+</section>
+<section id="step-3-import-data">
+<h2>Step 3: Import Data<a class="headerlink" href="#step-3-import-data" title="Link to this heading">¶</a></h2>
+<p>Execute the <cite>IMPORT FROM CSV</cite> command using the defined connection and specifying the details of the CSV file, such as its location, column separators, and encoding:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">IMPORT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">sales_data</span>
+</span><span data-line="2"><span class="k">FROM</span><span class="w"> </span><span class="n">CSV</span>
+</span><span data-line="3"><span class="k">AT</span><span class="w"> </span><span class="n">S3_MY_BUCKET</span>
+</span><span data-line="4"><span class="n">FILE</span><span class="w"> </span><span class="s1">&#39;sales_2025/sales.csv&#39;</span>
+</span><span data-line="5"><span class="k">COLUMN</span><span class="w"> </span><span class="n">SEPARATOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;;&#39;</span>
+</span><span data-line="6"><span class="k">ROW</span><span class="w"> </span><span class="n">SEPARATOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CRLF&#39;</span>
+</span><span data-line="7"><span class="k">COLUMN</span><span class="w"> </span><span class="k">DELIMITER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&quot;&#39;</span>
+</span><span data-line="8"><span class="k">ENCODING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;UTF-8&#39;</span>
+</span><span data-line="9"><span class="n">SKIP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure to replace <cite>my-access-key</cite>, <cite>my-secret-access</cite>, <cite>my-bucket-name</cite> with your actual AWS S3 credentials.</p>
+</div>
+<p>For more detailed information and additional options, refer to the Exasol documentation at: <cite>Exasol Documentation &lt;https://docs.exasol.com/db/latest/sql/import.htm&gt;</cite>.</p>
 </section>
 <section id="parquet-files">
 <h2>Parquet Files<a class="headerlink" href="#parquet-files" title="Link to this heading">¶</a></h2>
