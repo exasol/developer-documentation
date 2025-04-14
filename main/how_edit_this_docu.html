@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="grass" data-content_root="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>How to edit this Documentation - exasol-developer-documentation</title><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Changes" href="changes/changelog.html" /><link rel="prev" title="FAQ" href="faq.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=397bb51e" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=c516b45e" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
+    
+    <meta property="og:type" content="website"/><meta property="og:title" content="How to edit this Documentation"/>
+<meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="_static/light-exasol-logo.svg" alt="exasol-developer-documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="_static/dark-exasol-logo.svg" alt="exasol-developer-documentation" height="28" loading="lazy" />
+      <strong>exasol-developer-documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="HeadNav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">main</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="how_edit_this_docu.html">main</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/exasol/developer-documentation" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="HeadNav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_ingestion.html">Data Ingestion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_python/index.html">Distributed Python (UDFs)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="distributed_python/intro.html">Intro to UDFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributed_python/usage.html">Creating and running UDFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributed_python/debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributed_python/advanced.html">Advanced</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-question" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg> FAQ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to edit this Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes/changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changes/unreleased.html">Unreleased</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#edit-locally">Edit locally</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#preparations">Preparations</a></li>
+<li><a class="reference internal" href="#edit-documentation">Edit documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#edit-in-github-codespaces">Edit in GitHub Codespaces</a><ul>
+<li><a class="reference internal" href="#id1">Preparations</a></li>
+<li><a class="reference internal" href="#id2">Edit documentation</a></li>
+<li><a class="reference internal" href="#stopping-or-deleting-a-codespace">Stopping or deleting a Codespace</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6"><div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">exasol-developer-documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">How to edit this Documentation</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="how-to-edit-this-documentation">
+<h1>How to edit this Documentation<a class="headerlink" href="#how-to-edit-this-documentation" title="Link to this heading">¶</a></h1>
+<section id="edit-locally">
+<h2>Edit locally<a class="headerlink" href="#edit-locally" title="Link to this heading">¶</a></h2>
+<section id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Python &gt;= 3.9</p></li>
+<li><p><a class="reference external" href="https://python-poetry.org/docs/#installing-with-pipx">Poetry</a> &gt;= 2.1</p></li>
+</ul>
+</section>
+<section id="preparations">
+<h3>Preparations<a class="headerlink" href="#preparations" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Clone Repository:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/exasol/developer-documentation.git
+</span></pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Create Branch:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>switch<span class="w"> </span>-C<span class="w"> </span>documentation/my_awesome_branch
+</span></pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Create Poetry Environment:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">poetry<span class="w"> </span>install
+</span></pre></div>
+</div>
+</section>
+<section id="edit-documentation">
+<h3>Edit documentation<a class="headerlink" href="#edit-documentation" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Edit documentation in <cite>doc</cite> directory using <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">Sphinx reStructuredText</a></p></li>
+<li><p>Build the documentation locally:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">poetry<span class="w"> </span>run<span class="w"> </span>nox<span class="w"> </span>-s<span class="w"> </span>docs:build
+</span></pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Open the locally built documentation in your browser:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">poetry<span class="w"> </span>run<span class="w"> </span>nox<span class="w"> </span>-s<span class="w"> </span>docs:open
+</span></pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>When finished editing</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;My awesome change&quot;</span>
+</span><span data-line="2">git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>documentation/my_awesome_branch
+</span></pre></div>
+</div>
+<p>And finally create a PR on GitHub.</p>
+</section>
+</section>
+<section id="edit-in-github-codespaces">
+<h2>Edit in GitHub Codespaces<a class="headerlink" href="#edit-in-github-codespaces" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h3>Preparations<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Start a Codespace on GitHub</p></li>
+</ol>
+<img alt="Start a Codespace on GitHub" src="_images/start_codespace.png" />
+<ol class="arabic simple" start="2">
+<li><p>Wait for Codespace to start (can take a few minutes)</p></li>
+</ol>
+<img alt="Wait for Codespace to start (can take a few minutes)" src="_images/codespace.png" />
+<ol class="arabic simple" start="3">
+<li><p>Select the Terminal in Codespace, if not already selected</p></li>
+</ol>
+<img alt="Select the Terminal in Codespace, if not already selected" src="_images/terminal_codespace.png" />
+<ol class="arabic simple" start="4">
+<li><p>Wait for the installation of poetry</p></li>
+</ol>
+<img alt="Wait for the installation of poetry" src="_images/poetry_installation.png" />
+<ol class="arabic simple" start="5">
+<li><p>Create branch:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>switch<span class="w"> </span>-C<span class="w"> </span>documentation/my_awesome_branch
+</span></pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Create poetry environment:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">poetry<span class="w"> </span>install
+</span></pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Edit documentation<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple" start="4">
+<li><p>Edit Documentation in <cite>doc</cite> directory using <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">Sphinx reStructuredText</a></p></li>
+<li><p>Build the Documentation:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">poetry<span class="w"> </span>run<span class="w"> </span>nox<span class="w"> </span>-s<span class="w"> </span>docs:build
+</span></pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Serve the Documentation:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">poetry<span class="w"> </span>run<span class="w"> </span>nox<span class="w"> </span>-s<span class="w"> </span>docs:serve<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="p">&amp;</span>
+</span></pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Forward port on Codespace and open the served Documentation:</p></li>
+</ol>
+<img alt="Forward port on Codespace and open the served Documentation" src="_images/forward_port.png" />
+<ol class="arabic simple" start="7">
+<li><p>When finished editing</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;My awesome change&quot;</span>
+</span><span data-line="2">git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>documentation/my_awesome_branch
+</span></pre></div>
+</div>
+<p>And finally create a PR on GitHub.</p>
+</section>
+<section id="stopping-or-deleting-a-codespace">
+<h3>Stopping or deleting a Codespace<a class="headerlink" href="#stopping-or-deleting-a-codespace" title="Link to this heading">¶</a></h3>
+<p>Codespace can cause costs, so stopping or deleting them after use is a good idea.</p>
+<ol class="arabic simple">
+<li><p>Go to the <a class="reference external" href="https://github.com/codespaces/">Codespace page</a></p></li>
+<li><p>Stop or delete a Codespace</p></li>
+</ol>
+<img alt="Stopping or deleting a Codespace" src="_images/stop_codespace.png" />
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="faq.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-question" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg> FAQ</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="changes/changelog.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Changes</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2025, Exasol</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/exasol/developer-documentation" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+      <script src="_static/shibuya.js?v=e2230717"></script></body>
+</html>
