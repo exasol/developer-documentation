@@ -40,13 +40,13 @@ Edit documentation
 
 .. code-block:: bash
 
-    poetry run nox -s doc:builds
+    poetry run nox -s docs:build
 
 3. Open the locally built Documentation in your Browser:
 
 .. code-block:: bash
 
-    poetry run nox -s doc:open
+    poetry run nox -s docs:open
 
 4. When finished editing
 
@@ -104,13 +104,13 @@ Edit documentation
 
 .. code-block:: bash
 
-    poetry run nox -s doc:builds
+    poetry run nox -s docs:build
 
 6. Serve the Documentation:
 
 .. code-block:: bash
 
-    poetry run nox -s doc:serve &> /dev/null &
+    poetry run nox -s docs:serve &> /dev/null &
 
 6. Forward port on Codespace and open the served Documentation:
 
