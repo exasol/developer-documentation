@@ -10,7 +10,7 @@ from exasol.toolbox.nox.tasks import *
 nox.options.sessions = ["project:fix"]
 
 
-@nox.session(python=False, name="doc:serve")
+@nox.session(python=False, name="docs:serve")
 def serve_docs(session):
     session.run(
         sys.executable,
