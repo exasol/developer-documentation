@@ -36,13 +36,13 @@ Edit documentation
 
 1. Edit documentation in `doc` directory using `Sphinx reStructuredText`_
 
-2. Build the Documentation locally:
+2. Build the documentation locally:
 
 .. code-block:: bash
 
     poetry run nox -s docs:build
 
-3. Open the locally built Documentation in your Browser:
+3. Open the locally built documentation in your browser:
 
 .. code-block:: bash
 
@@ -83,13 +83,13 @@ Preparations
 .. image:: images/codespace/poetry_installation.png
   :alt: Wait for the installation of poetry
 
-5. Create Branch:
+5. Create branch:
 
 .. code-block:: bash
 
     git switch -C documentation/my_awesome_branch
 
-6. Create Poetry Environment:
+6. Create poetry environment:
 
 .. code-block:: bash
 
@@ -129,11 +129,11 @@ And finally create a PR on GitHub.
 Stopping or deleting a Codespace
 ................................
 
-Codespace can cause costs, so stoping or deleting them after use is a good idea.
+Codespace can cause costs, so stopping or deleting them after use is a good idea.
 
 1. Go to the `Codespace page <https://github.com/codespaces/>`_
 
-2. Stopping or deleting a Codespace
+2. Stop or delete a Codespace
 
 .. image:: images/codespace/stop_codespace.png
   :alt: Stopping or deleting a Codespace
