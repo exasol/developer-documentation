@@ -141,7 +141,7 @@ For more detailed information on loading data from external sources, please refe
 
 Using Virtual Schemas
 ^^^^^^^^^^^^^^^^^^^^^
-Virtual schemas in Exasol provide an abstraction layer that makes external data sources accessible through regular SQL commands. 
+Virtual Schemas in Exasol provide an abstraction layer that makes external data sources accessible through regular SQL commands. 
 This allows you to query external data as if it were stored in Exasol, without the need to physically load the data into the database.
 
 For more information on virtual schemas and the supported dialects, please refer to the following resources:
