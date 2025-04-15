@@ -71,8 +71,8 @@ Use the `pyexasol` library to connect to the Exasol database and insert the Data
     conn.import_from_pandas(df, 'your_schema.your_table')
 
 
-Other options to import parquet
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Other Options to Import Parquet Data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 To import a Parquet file from e.g. Amazon S3 into Exasol, you can also use the Exasol Cloud Storage Extensions. 
 Detailed instructions and examples can be found in the the following `Cloud Storage Extensions User guide <https://github.com/exasol/cloud-storage-extension/blob/main/doc/user_guide/user_guide.md>`__.
 
