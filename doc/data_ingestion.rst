@@ -27,8 +27,8 @@ The example below shows how to import a CSV file into an Exasol database using `
 For more detailed information and additional options, refer to the `pyexasol documentation <https://exasol.github.io/pyexasol/master/user_guide/http_transport.html#import-from-file>`_
 
 
-Other options to import CSV
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Other Options to Import CSV Data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Exasol also provides a bulk loader to import CSV from various external sources, details can be found in the `Exasol documentation <https://docs.exasol.com/db/latest/sql/import.htm>`_
 
 
