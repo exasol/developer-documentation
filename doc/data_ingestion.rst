@@ -115,7 +115,7 @@ Here is an example of how to load data from a PostgreSQL database using JDBC:
 
 Example: Loading Data from an HTTP Source
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Here is an example of how to load data from a CSV file stored on an HTTPS server:
+Here is an example of how to load data from a CSV file stored on an HTTP server:
 
 .. code-block:: python
 
