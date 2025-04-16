@@ -89,13 +89,22 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
-<li><a class="reference internal" href="#importing-csv-from-aws-s3-into-exasol">Importing CSV from AWS S3 into Exasol</a></li>
-<li><a class="reference internal" href="#step-1-create-a-virtual-schema-connection">Step 1: Create a Virtual Schema Connection</a></li>
-<li><a class="reference internal" href="#step-2-create-a-table">Step 2: Create a Table</a></li>
-<li><a class="reference internal" href="#step-3-import-data">Step 3: Import Data</a></li>
-<li><a class="reference internal" href="#parquet-files">Parquet Files</a></li>
-<li><a class="reference internal" href="#import-from-external-sources">Import from external sources</a></li>
-<li><a class="reference internal" href="#http-transport">HTTP Transport</a></li>
+<li><a class="reference internal" href="#csv-files">CSV files</a><ul>
+<li><a class="reference internal" href="#other-options-to-import-csv-data">Other Options to Import CSV Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#parquet-files">Parquet Files</a><ul>
+<li><a class="reference internal" href="#reading-the-parquet-file">Reading the Parquet File</a></li>
+<li><a class="reference internal" href="#inserting-data-into-exasol">Inserting Data into Exasol</a></li>
+<li><a class="reference internal" href="#other-options-to-import-parquet-data">Other Options to Import Parquet Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#loading-data-from-external-sources">Loading Data from External Sources</a><ul>
+<li><a class="reference internal" href="#example-loading-data-from-a-jdbc-source">Example: Loading Data from a JDBC Source</a></li>
+<li><a class="reference internal" href="#example-loading-data-from-an-http-source">Example: Loading Data from an HTTP Source</a></li>
+<li><a class="reference internal" href="#using-virtual-schemas">Using Virtual Schemas</a></li>
+</ul>
+</li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -127,60 +136,138 @@ data-aria-dark="Switch to auto color mode">
         <article class="yue" role="main">
           <section id="data-ingestion">
 <h1>Data Ingestion<a class="headerlink" href="#data-ingestion" title="Link to this heading">¶</a></h1>
-<section id="importing-csv-from-aws-s3-into-exasol">
-<h2>Importing CSV from AWS S3 into Exasol<a class="headerlink" href="#importing-csv-from-aws-s3-into-exasol" title="Link to this heading">¶</a></h2>
-<p>This example demonstrates how to import a CSV file from AWS S3 into Exasol using the <cite>IMPORT FROM CSV</cite> command.</p>
-</section>
-<section id="step-1-create-a-virtual-schema-connection">
-<h2>Step 1: Create a Virtual Schema Connection<a class="headerlink" href="#step-1-create-a-virtual-schema-connection" title="Link to this heading">¶</a></h2>
-<p>Establish a connection to your AWS S3 bucket using your AWS credentials:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">CREATE</span><span class="w"> </span><span class="k">CONNECTION</span><span class="w"> </span><span class="n">S3_MY_BUCKET</span>
-</span><span data-line="2"><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;http://&lt;my_bucketname&gt;.s3.&lt;my_region&gt;.amazonaws.com&#39;</span>
-</span><span data-line="3"><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;&lt;my_access_key&gt;&#39;</span>
-</span><span data-line="4"><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;&lt;my_secret_key&gt;&#39;</span><span class="p">;</span>
+<section id="csv-files">
+<h2>CSV files<a class="headerlink" href="#csv-files" title="Link to this heading">¶</a></h2>
+<p>The example below shows how to import a CSV file into an Exasol database using <cite>pyexasol</cite> and the <cite>import_from_file</cite> function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pyexasol</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Connection details</span>
+</span><span data-line="4"><span class="n">dsn</span> <span class="o">=</span> <span class="s1">&#39;your_exasol_dsn&#39;</span>
+</span><span data-line="5"><span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;your_username&#39;</span>
+</span><span data-line="6"><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;your_password&#39;</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># Connect to Exasol</span>
+</span><span data-line="9"><span class="n">C</span> <span class="o">=</span> <span class="n">pyexasol</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dsn</span><span class="o">=</span><span class="n">dsn</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="c1"># Path to the local CSV file</span>
+</span><span data-line="12"><span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;/path/to/your/file.csv&#39;</span>
+</span><span data-line="13">
+</span><span data-line="14"><span class="c1"># Import CSV file into Exasol</span>
+</span><span data-line="15"><span class="n">C</span><span class="o">.</span><span class="n">import_from_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;your_schema.your_table&#39;</span><span class="p">)</span>
 </span></pre></div>
 </div>
+<p>For more detailed information and additional options, refer to the <a class="reference external" href="https://exasol.github.io/pyexasol/master/user_guide/http_transport.html#import-from-file">pyexasol documentation</a></p>
+<section id="other-options-to-import-csv-data">
+<h3>Other Options to Import CSV Data<a class="headerlink" href="#other-options-to-import-csv-data" title="Link to this heading">¶</a></h3>
+<p>Exasol also provides a bulk loader to import CSV from various external sources, details can be found in the <a class="reference external" href="https://docs.exasol.com/db/latest/sql/import.htm">Exasol documentation</a></p>
 </section>
-<section id="step-2-create-a-table">
-<h2>Step 2: Create a Table<a class="headerlink" href="#step-2-create-a-table" title="Link to this heading">¶</a></h2>
-<p>Define the structure of the target table where the data from the CSV file will be stored:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sales_data</span><span class="w"> </span><span class="p">(</span>
-</span><span data-line="2"><span class="w">    </span><span class="n">order_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-</span><span data-line="3"><span class="w">    </span><span class="n">product_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-</span><span data-line="4"><span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-</span><span data-line="5"><span class="w">    </span><span class="n">price</span><span class="w"> </span><span class="n">DOUBLE</span>
-</span><span data-line="6"><span class="p">);</span>
-</span></pre></div>
-</div>
-</section>
-<section id="step-3-import-data">
-<h2>Step 3: Import Data<a class="headerlink" href="#step-3-import-data" title="Link to this heading">¶</a></h2>
-<p>Execute the <cite>IMPORT FROM CSV</cite> command using the defined connection and specifying the details of the CSV file, such as its location, column separators, and encoding:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">IMPORT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">sales_data</span>
-</span><span data-line="2"><span class="k">FROM</span><span class="w"> </span><span class="n">CSV</span>
-</span><span data-line="3"><span class="k">AT</span><span class="w"> </span><span class="n">S3_MY_BUCKET</span>
-</span><span data-line="4"><span class="n">FILE</span><span class="w"> </span><span class="s1">&#39;sales_2025/sales.csv&#39;</span>
-</span><span data-line="5"><span class="k">COLUMN</span><span class="w"> </span><span class="n">SEPARATOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;;&#39;</span>
-</span><span data-line="6"><span class="k">ROW</span><span class="w"> </span><span class="n">SEPARATOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CRLF&#39;</span>
-</span><span data-line="7"><span class="k">COLUMN</span><span class="w"> </span><span class="k">DELIMITER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&quot;&#39;</span>
-</span><span data-line="8"><span class="k">ENCODING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;UTF-8&#39;</span>
-</span><span data-line="9"><span class="n">SKIP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-</span></pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure to replace <cite>my-access-key</cite>, <cite>my-secret-access</cite>, <cite>my-bucket-name</cite> with your actual AWS S3 credentials.</p>
-</div>
-<p>For more detailed information and additional options, refer to the Exasol documentation at: <cite>Exasol Documentation &lt;https://docs.exasol.com/db/latest/sql/import.htm&gt;</cite>.</p>
 </section>
 <section id="parquet-files">
 <h2>Parquet Files<a class="headerlink" href="#parquet-files" title="Link to this heading">¶</a></h2>
+<p>The example below shows how to read a local Parquet file into a pandas DataFrame and then insert that data into an Exasol database using <cite>pyexasol</cite>.</p>
+<section id="reading-the-parquet-file">
+<h3>Reading the Parquet File<a class="headerlink" href="#reading-the-parquet-file" title="Link to this heading">¶</a></h3>
+<p>Use the <cite>pandas.read_parquet</cite> function to read the Parquet file into a DataFrame.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Path to the local Parquet file</span>
+</span><span data-line="4"><span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;path/to/your/file.parquet&#39;</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="c1"># Read the Parquet file into a DataFrame</span>
+</span><span data-line="7"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</span></pre></div>
+</div>
 </section>
-<section id="import-from-external-sources">
-<h2>Import from external sources<a class="headerlink" href="#import-from-external-sources" title="Link to this heading">¶</a></h2>
+<section id="inserting-data-into-exasol">
+<h3>Inserting Data into Exasol<a class="headerlink" href="#inserting-data-into-exasol" title="Link to this heading">¶</a></h3>
+<p>Use the <cite>pyexasol</cite> library to connect to the Exasol database and insert the DataFrame.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pyexasol</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Connection details</span>
+</span><span data-line="4"><span class="n">dsn</span> <span class="o">=</span> <span class="s1">&#39;your_exasol_dsn&#39;</span>
+</span><span data-line="5"><span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;your_username&#39;</span>
+</span><span data-line="6"><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;your_password&#39;</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># Connect to Exasol</span>
+</span><span data-line="9"><span class="n">conn</span> <span class="o">=</span> <span class="n">pyexasol</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dsn</span><span class="o">=</span><span class="n">dsn</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="c1"># Insert DataFrame into Exasol</span>
+</span><span data-line="12"><span class="n">conn</span><span class="o">.</span><span class="n">import_from_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;your_schema.your_table&#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
 </section>
-<section id="http-transport">
-<h2>HTTP Transport<a class="headerlink" href="#http-transport" title="Link to this heading">¶</a></h2>
+<section id="other-options-to-import-parquet-data">
+<h3>Other Options to Import Parquet Data<a class="headerlink" href="#other-options-to-import-parquet-data" title="Link to this heading">¶</a></h3>
+<p>To import a Parquet file from e.g. Amazon S3 into Exasol, you can also use the Exasol Cloud Storage Extensions.
+Detailed instructions and examples can be found in the the following <a class="reference external" href="https://github.com/exasol/cloud-storage-extension/blob/main/doc/user_guide/user_guide.md">Cloud Storage Extensions User guide</a>.</p>
+</section>
+</section>
+<section id="loading-data-from-external-sources">
+<h2>Loading Data from External Sources<a class="headerlink" href="#loading-data-from-external-sources" title="Link to this heading">¶</a></h2>
+<p>Exasol supports loading data from various external sources using the <cite>IMPORT</cite> statement.
+You can connect to external databases via JDBC, or load data from files stored in e.g. Cloud Object Storage / Kafka and more.</p>
+<section id="example-loading-data-from-a-jdbc-source">
+<h3>Example: Loading Data from a JDBC Source<a class="headerlink" href="#example-loading-data-from-a-jdbc-source" title="Link to this heading">¶</a></h3>
+<p>Here is an example of how to load data from a PostgreSQL database using JDBC:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pyexasol</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Connection details</span>
+</span><span data-line="4"><span class="n">dsn</span> <span class="o">=</span> <span class="s1">&#39;your_exasol_dsn&#39;</span>
+</span><span data-line="5"><span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;your_username&#39;</span>
+</span><span data-line="6"><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;your_password&#39;</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># Connect to Exasol</span>
+</span><span data-line="9"><span class="n">conn</span> <span class="o">=</span> <span class="n">pyexasol</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dsn</span><span class="o">=</span><span class="n">dsn</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="c1"># Define the connection to the PostgreSQL database</span>
+</span><span data-line="12"><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span data-line="13"><span class="s2">    CREATE OR REPLACE CONNECTION my_pg_conn</span>
+</span><span data-line="14"><span class="s2">    TO &#39;jdbc:postgresql://your_postgresql_host:5432/your_database&#39;</span>
+</span><span data-line="15"><span class="s2">    USER &#39;your_pg_username&#39;</span>
+</span><span data-line="16"><span class="s2">    IDENTIFIED BY &#39;your_pg_password&#39;</span>
+</span><span data-line="17"><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</span><span data-line="18">
+</span><span data-line="19"><span class="c1"># Import data from PostgreSQL into Exasol</span>
+</span><span data-line="20"><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span data-line="21"><span class="s2">    IMPORT INTO your_schema.your_table</span>
+</span><span data-line="22"><span class="s2">    FROM JDBC AT my_pg_conn</span>
+</span><span data-line="23"><span class="s2">    STATEMENT &#39;SELECT * FROM your_pg_table&#39;</span>
+</span><span data-line="24"><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
+<section id="example-loading-data-from-an-http-source">
+<h3>Example: Loading Data from an HTTP Source<a class="headerlink" href="#example-loading-data-from-an-http-source" title="Link to this heading">¶</a></h3>
+<p>Here is an example of how to load data from a CSV file stored on an HTTP server:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pyexasol</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Connection details</span>
+</span><span data-line="4"><span class="n">dsn</span> <span class="o">=</span> <span class="s1">&#39;your_exasol_dsn&#39;</span>
+</span><span data-line="5"><span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;your_username&#39;</span>
+</span><span data-line="6"><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;your_password&#39;</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># Connect to Exasol</span>
+</span><span data-line="9"><span class="n">conn</span> <span class="o">=</span> <span class="n">pyexasol</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dsn</span><span class="o">=</span><span class="n">dsn</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="c1"># Import data from a CSV file on an HTTP server</span>
+</span><span data-line="12"><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span data-line="13"><span class="s2">    IMPORT INTO your_schema.your_table</span>
+</span><span data-line="14"><span class="s2">    FROM CSV AT &#39;https://your_https_server/path/to/your/file.csv&#39;</span>
+</span><span data-line="15"><span class="s2">    FILE OPTIONS &#39;DELIMITER=; ENCODING=UTF-8 SKIP_ROWS=1 NULL=NULL&#39;</span>
+</span><span data-line="16"><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>For more detailed information on loading data from external sources, please refer to the Exasol documentation:
+* <a class="reference external" href="https://docs.exasol.com/db/latest/loading_data/load_data_from_externalsources.htm">Loading Data from External Sources</a>.</p>
+</section>
+<section id="using-virtual-schemas">
+<h3>Using Virtual Schemas<a class="headerlink" href="#using-virtual-schemas" title="Link to this heading">¶</a></h3>
+<p>Virtual Schemas in Exasol provide an abstraction layer that makes external data sources accessible through regular SQL commands.
+This allows you to query external data as if it were stored in Exasol, without the need to physically load the data into the database.</p>
+<p>For more information on virtual schemas and the supported dialects, please refer to the following resources:
+* <a class="reference external" href="https://github.com/exasol/virtual-schemas/blob/main/doc/user_guide/dialects.md">Virtual Schemas User Guide</a>.
+* <a class="reference external" href="https://docs.exasol.com/db/latest/database_concepts/virtual_schemas.htm">Virtual Schemas Documentation</a>.</p>
+</section>
 </section>
 </section>
 
