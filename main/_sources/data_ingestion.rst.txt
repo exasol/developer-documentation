@@ -133,7 +133,6 @@ Here is an example of how to load data from a CSV file stored on an HTTP server:
     conn.execute("""
         IMPORT INTO your_schema.your_table
         FROM CSV AT 'https://your_https_server/path/to/your/file.csv'
-        FILE OPTIONS 'DELIMITER=; ENCODING=UTF-8 SKIP_ROWS=1 NULL=NULL'
     """)
 
 For more detailed information on loading data from external sources, please refer to the Exasol documentation:

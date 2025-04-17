@@ -253,8 +253,7 @@ You can connect to external databases via JDBC, or load data from files stored i
 </span><span data-line="12"><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 </span><span data-line="13"><span class="s2">    IMPORT INTO your_schema.your_table</span>
 </span><span data-line="14"><span class="s2">    FROM CSV AT &#39;https://your_https_server/path/to/your/file.csv&#39;</span>
-</span><span data-line="15"><span class="s2">    FILE OPTIONS &#39;DELIMITER=; ENCODING=UTF-8 SKIP_ROWS=1 NULL=NULL&#39;</span>
-</span><span data-line="16"><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</span><span data-line="15"><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
 <p>For more detailed information on loading data from external sources, please refer to the Exasol documentation:

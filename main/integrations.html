@@ -89,10 +89,14 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
-<li><a class="reference internal" href="#jupysql">JupySQL</a></li>
-<li><a class="reference internal" href="#pandas">Pandas</a></li>
-<li><a class="reference internal" href="#ibis">Ibis</a></li>
 <li><a class="reference internal" href="#sqlalchemy">SQLAlchemy</a></li>
+<li><a class="reference internal" href="#jupysql">JupySQL</a></li>
+<li><a class="reference internal" href="#pandas">Pandas</a><ul>
+<li><a class="reference internal" href="#importing-data-into-pandas">Importing Data into Pandas</a></li>
+<li><a class="reference internal" href="#exporting-data-from-pandas-to-exasol">Exporting Data from Pandas to Exasol</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ibis">Ibis</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -124,17 +128,52 @@ data-aria-dark="Switch to auto color mode">
         <article class="yue" role="main">
           <section id="integrations">
 <h1>Integrations<a class="headerlink" href="#integrations" title="Link to this heading">¶</a></h1>
+<section id="sqlalchemy">
+<h2>SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Link to this heading">¶</a></h2>
+<p>Install SQLAlchemy</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">pip</span> <span class="n">install</span> <span class="n">sqlalchemy</span><span class="o">-</span><span class="n">exasol</span>
+</span></pre></div>
+</div>
+<p>Connect to Exasol database using SQLAlchemy</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
+</span><span data-line="2"><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;exa+websocket://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;schema&gt;?CONNECTIONLCALL=en_US.UTF-8&quot;</span>
+</span><span data-line="3"><span class="n">e</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">r</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select 42 from dual&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>Please also refer to <a class="reference external" href="https://exasol.github.io/sqlalchemy-exasol/master/user_guide.html#user-guide">sqlalchemy exasol documentation</a>.</p>
+</section>
 <section id="jupysql">
 <h2>JupySQL<a class="headerlink" href="#jupysql" title="Link to this heading">¶</a></h2>
+<p>How to work with JupySQL in JupyterLab is described in <a class="reference internal" href="environments.html"><span class="doc">Environments</span></a>.</p>
 </section>
 <section id="pandas">
 <h2>Pandas<a class="headerlink" href="#pandas" title="Link to this heading">¶</a></h2>
+<section id="importing-data-into-pandas">
+<h3>Importing Data into Pandas<a class="headerlink" href="#importing-data-into-pandas" title="Link to this heading">¶</a></h3>
+<p>You can fetch data from Exasol into a Pandas DataFrame using pyexasol.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Execute a query and fetch data into a Pandas DataFrame, Conn is an existing pyexasol connection.</span>
+</span><span data-line="4"><span class="n">df</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">export_to_pandas</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM &lt;your_table_name&gt;&#39;</span><span class="p">)</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="c1"># Display the DataFrame</span>
+</span><span data-line="7"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
+<section id="exporting-data-from-pandas-to-exasol">
+<h3>Exporting Data from Pandas to Exasol<a class="headerlink" href="#exporting-data-from-pandas-to-exasol" title="Link to this heading">¶</a></h3>
+<p>You can also export data from a Pandas DataFrame to an Exasol table.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Assume you have a Pandas DataFrame `df` you wish to export</span>
+</span><span data-line="2"><span class="n">conn</span><span class="o">.</span><span class="n">import_from_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;&lt;your_target_table_name&gt;&#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
 </section>
 <section id="ibis">
 <h2>Ibis<a class="headerlink" href="#ibis" title="Link to this heading">¶</a></h2>
-</section>
-<section id="sqlalchemy">
-<h2>SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Link to this heading">¶</a></h2>
+<p>Please refer to the <a class="reference external" href="https://ibis-project.org/backends/exasol">IBIS documentation</a>.</p>
 </section>
 </section>
 
