@@ -16,7 +16,7 @@ Connect to Exasol database using SQLAlchemy
 .. code-block:: python
 
     from sqlalchemy import create_engine
-    url = "exa+websocket://A_USER:A_PASSWORD@192.168.1.2..8:1234/my_schema?CONNECTIONLCALL=en_US.UTF-8"
+    url = "exa+websocket://<user>:<password>@<host>:<port>/<schema>?CONNECTIONLCALL=en_US.UTF-8"
     e = create_engine(url)
     r = e.execute("select 42 from dual").fetchall()
 

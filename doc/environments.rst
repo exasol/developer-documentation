@@ -55,7 +55,7 @@ Run queries against Exasol
 Positron
 --------
 
-You can either connect to exasol with pyexasol as described in :doc:`getting_started` or use JupySQL as described  in :ref:`jupyterlab`.
+You can either connect to Exasol with pyexasol as described in :doc:`getting_started` or using JupySQL as described  in :ref:`jupyterlab`.
 
 pyCharm
 -------
