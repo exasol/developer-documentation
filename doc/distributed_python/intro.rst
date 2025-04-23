@@ -2,7 +2,7 @@ Intro to UDFs
 -------------
 
 UDF scripts allow you to program your own analysis, processing, and generation functions, and to execute these functions in parallel inside an Exasol cluster. 
-By using UDF scripts you can solve problems that are not possible to solve with SQL statements.
+By using UDF scripts, you can solve problems that are not possible to solve with SQL statements.
 
 Exasol supports the programming languages Java, Lua, R, and Python in UDF scripts. These languages provide different functionalities (for example, statistical functions in R) and different libraries.
 
