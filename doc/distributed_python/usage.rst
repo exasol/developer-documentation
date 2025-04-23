@@ -19,7 +19,6 @@ These can be combined as needed to suite your use case.
 
     - **EMITS** Specifies that the script can create (emit) multiple result rows (tuples).
 
-You can define the data types of input and output parameters to specify the conversion between internal data types and the database SQL data types. If you do not specify the data types, the script has to handle that dynamically.
 Each UDF script must contain the main function run(). This function is called with a parameter providing access to the input data of Exasol. If your script processes multiple input tuples (using SET), you can iterate through the single tuples using this parameter.
 You can specify an ORDER BY clause either when creating a script or when calling it. This clause sorts the processing of the groups of SET input data. If it is necessary for the algorithm, you should specify this clause when creating the script to avoid wrong results due to misuse.
 
