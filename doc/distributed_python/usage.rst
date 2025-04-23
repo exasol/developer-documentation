@@ -11,7 +11,7 @@ These can be combined as needed to suite your use case.
 
     - **SCALAR** Specifies that the script processes single input rows. The code is therefore called once per input row.
 
-    - **SET** Specifies that the processing refers to a set of input values. Within the code, you can iterate through those values.
+    - **SET** Specifies that the processing refers to a set of input rows. Within the code, you can iterate through those rows.
 
 - Output values
 
