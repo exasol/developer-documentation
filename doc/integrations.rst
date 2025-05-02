@@ -60,4 +60,4 @@ Ibis
 
 Please refer to the `IBIS documentation <https://ibis-project.org/backends/exasol>`_.
 
-
+You can also watch `this video <https://www.youtube.com/watch?v=0YaQo3o5ePI&t=2s>`_ for a step by step walk through of using Ibis with Exasol via AI Lab.

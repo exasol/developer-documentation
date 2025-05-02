@@ -10,6 +10,7 @@ Documentation and resources for data scientists and programmatic users to perfor
    getting_started
    data_ingestion
    distributed_python/index.rst
+   data_science
    examples
    environments
    integrations
