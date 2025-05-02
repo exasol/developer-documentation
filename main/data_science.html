@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="grass" data-content_root="./">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Integrations - exasol-developer-documentation</title><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="FAQ" href="faq.html" /><link rel="prev" title="Environments" href="environments.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Data Science with Exasol - exasol-developer-documentation</title><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Examples" href="examples.html" /><link rel="prev" title="Advanced" href="distributed_python/advanced.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=397bb51e" />
@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
     
-    <meta property="og:type" content="website"/><meta property="og:title" content="Integrations"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Data Science with Exasol"/>
 <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -33,7 +33,7 @@
       <span class="hidden md:inline">main</span>
       <i class="i-lucide chevron-down"></i>
     </button>
-    <div class="nav-versions-choices"><ul><li><a href="integrations.html">main</a></li></ul></div>
+    <div class="nav-versions-choices"><ul><li><a href="data_science.html">main</a></li></ul></div>
   </div><div class="sy-head-socials">
   <a href="https://github.com/exasol/developer-documentation" aria-label="GitHub">
     <iconify-icon icon="simple-icons:github"></iconify-icon>
@@ -68,10 +68,10 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="distributed_python/advanced.html">Advanced</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="data_science.html">Data Science with Exasol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Science with Exasol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environments.html">Environments</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-question" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg> FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how_edit_this_docu.html">How to edit this Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changes/changelog.html">Changes</a><ul>
@@ -89,17 +89,7 @@ data-aria-dark="Switch to auto color mode">
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-lucide close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
-<li><a class="reference internal" href="#sqlalchemy">SQLAlchemy</a></li>
-<li><a class="reference internal" href="#jupysql">JupySQL</a></li>
-<li><a class="reference internal" href="#pandas">Pandas</a><ul>
-<li><a class="reference internal" href="#importing-data-into-pandas">Importing Data into Pandas</a></li>
-<li><a class="reference internal" href="#exporting-data-from-pandas-to-exasol">Exporting Data from Pandas to Exasol</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#ibis">Ibis</a></li>
-</ul>
-</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
   <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
   <main class="sy-main w-full max-sm:max-w-full print:pt-6"><div class="sy-breadcrumbs" role="navigation">
@@ -114,7 +104,7 @@ data-aria-dark="Switch to auto color mode">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">Integrations</strong>
+        <strong itemprop="name">Data Science with Exasol</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -127,56 +117,15 @@ data-aria-dark="Switch to auto color mode">
 </div><div class="flex flex-col break-words justify-between">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
-          <section id="integrations">
-<h1>Integrations<a class="headerlink" href="#integrations" title="Link to this heading">¶</a></h1>
-<section id="sqlalchemy">
-<h2>SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Link to this heading">¶</a></h2>
-<p>Install SQLAlchemy</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">pip</span> <span class="n">install</span> <span class="n">sqlalchemy</span><span class="o">-</span><span class="n">exasol</span>
-</span></pre></div>
-</div>
-<p>Connect to Exasol database using SQLAlchemy</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
-</span><span data-line="2"><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;exa+websocket://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;schema&gt;?CONNECTIONLCALL=en_US.UTF-8&quot;</span>
-</span><span data-line="3"><span class="n">e</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</span><span data-line="4"><span class="n">r</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select 42 from dual&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-</span></pre></div>
-</div>
-<p>Please also refer to <a class="reference external" href="https://exasol.github.io/sqlalchemy-exasol/master/user_guide.html#user-guide">sqlalchemy exasol documentation</a>.</p>
-</section>
-<section id="jupysql">
-<h2>JupySQL<a class="headerlink" href="#jupysql" title="Link to this heading">¶</a></h2>
-<p>How to work with JupySQL in JupyterLab is described in <a class="reference internal" href="environments.html"><span class="doc">Environments</span></a>.</p>
-</section>
-<section id="pandas">
-<h2>Pandas<a class="headerlink" href="#pandas" title="Link to this heading">¶</a></h2>
-<section id="importing-data-into-pandas">
-<h3>Importing Data into Pandas<a class="headerlink" href="#importing-data-into-pandas" title="Link to this heading">¶</a></h3>
-<p>You can fetch data from Exasol into a Pandas DataFrame using pyexasol.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-</span><span data-line="2">
-</span><span data-line="3"><span class="c1"># Execute a query and fetch data into a Pandas DataFrame, Conn is an existing pyexasol connection.</span>
-</span><span data-line="4"><span class="n">df</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">export_to_pandas</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM &lt;your_table_name&gt;&#39;</span><span class="p">)</span>
-</span><span data-line="5">
-</span><span data-line="6"><span class="c1"># Display the DataFrame</span>
-</span><span data-line="7"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</span></pre></div>
-</div>
-</section>
-<section id="exporting-data-from-pandas-to-exasol">
-<h3>Exporting Data from Pandas to Exasol<a class="headerlink" href="#exporting-data-from-pandas-to-exasol" title="Link to this heading">¶</a></h3>
-<p>You can also export data from a Pandas DataFrame to an Exasol table.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Assume you have a Pandas DataFrame `df` you wish to export</span>
-</span><span data-line="2"><span class="n">conn</span><span class="o">.</span><span class="n">import_from_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;&lt;your_target_table_name&gt;&#39;</span><span class="p">)</span>
-</span></pre></div>
-</div>
-</section>
-</section>
-<section id="ibis">
-<h2>Ibis<a class="headerlink" href="#ibis" title="Link to this heading">¶</a></h2>
-<p>Please refer to the <a class="reference external" href="https://ibis-project.org/backends/exasol">IBIS documentation</a>.</p>
-<p>You can also watch <a class="reference external" href="https://www.youtube.com/watch?v=0YaQo3o5ePI&amp;t=2s">this video</a> for a step by step walk through of using Ibis with Exasol via AI Lab.</p>
-</section>
+          <section id="data-science-with-exasol">
+<h1>Data Science with Exasol<a class="headerlink" href="#data-science-with-exasol" title="Link to this heading">¶</a></h1>
+<p>Exasol has significant capabilities for implementing data science workflows - from classic machine learning to Gen AI and language model solutions.</p>
+<p>The best way to get started is with <a class="reference external" href="https://github.com/exasol/ai-lab">Exasol’s AI Lab</a>.</p>
+<p>This video walks through <a class="reference external" href="https://www.youtube.com/watch?v=LkqdLlRF2Go">getting started with AI Lab</a>.</p>
+<p>AI Lab includes various workbooks that you can run to load data into Exasol.
+This video walks through <a class="reference external" href="https://www.youtube.com/watch?v=-t1q6CeswJs&amp;t=1s">loading data</a> in more detail.</p>
+<p>If you want to leverage Exasol to build Gen AI and LM-based solutions we recommend starting with the Exasol <a class="reference external" href="https://github.com/exasol/transformers-extension">Transformers Extension</a>.</p>
+<p>This video showcases the potential <a class="reference external" href="https://www.youtube.com/watch?v=sHSnCR71kyc">applications of the Exasol Transformers Extension</a> .</p>
 </section>
 
         </article><button class="back-to-top" type="button">
@@ -185,16 +134,16 @@ data-aria-dark="Switch to auto color mode">
   </svg>
   <span>Back to top</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="environments.html">
+    <a href="distributed_python/advanced.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>Previous</span><div class="title">Environments</div></div>
+        <span>Previous</span><div class="title">Advanced</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="faq.html">
+    <a href="examples.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-question" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg> FAQ</div>
+        <div class="title">Examples</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

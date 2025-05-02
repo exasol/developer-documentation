@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="grass" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Advanced - exasol-developer-documentation</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Examples" href="../examples.html" /><link rel="prev" title="Debugging" href="debugging.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Advanced - exasol-developer-documentation</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Data Science with Exasol" href="../data_science.html" /><link rel="prev" title="Debugging" href="debugging.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
@@ -68,6 +68,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Advanced</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../data_science.html">Data Science with Exasol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../environments.html">Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
@@ -122,6 +123,14 @@ data-aria-dark="Switch to auto color mode">
         <article class="yue" role="main">
           <section id="advanced">
 <h1>Advanced<a class="headerlink" href="#advanced" title="Link to this heading">¶</a></h1>
+<p>From a performance perspective, which programming language you should use in an UDF script depends on the purpose and context of the script, as specific elements may have different capacities in each language. For example, string processing can be faster in one language while XML parsing can be faster in another. This means that one language cannot be said to have better performance in all circumstances. However, if overall performance is the most important criteria, we recommend using Lua. Lua is integrated in Exasol in the most native way, and therefore, it has the smallest process overhead.</p>
+<p>During the processing of a SELECT statement, multiple virtual machines are started for each script and node. These virtual machines process the data independently. For scalar functions, the input rows are distributed across those virtual machines to achieve maximum parallelism. For SET input tuples, the virtual machines are used per group if you specify a GROUP BY clause. Otherwise, there will be only one group, which means only one node and virtual machine can process the data.</p>
+<p>The following pages contain information about more advanced UDF functionality:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.exasol.com/db/latest/database_concepts/udf_scripts/udf_instance_limit.htm">UDF Instance Limiting</a></p></li>
+<li><p><a class="reference external" href="https://docs.exasol.com/db/latest/database_concepts/udf_scripts/hide_access_keys_passwords.htm">Hiding Access tokens and secrets</a></p></li>
+<li><p><a class="reference external" href="https://docs.exasol.com/db/latest/database_concepts/udf_scripts/adding_new_packages_script_languages.htm">Managing Script Language Containers</a></p></li>
+</ul>
 </section>
 
         </article><button class="back-to-top" type="button">
@@ -136,10 +145,10 @@ data-aria-dark="Switch to auto color mode">
         <span>Previous</span><div class="title">Debugging</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="../examples.html">
+    <a href="../data_science.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title">Examples</div>
+        <div class="title">Data Science with Exasol</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

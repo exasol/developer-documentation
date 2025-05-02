@@ -68,6 +68,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="advanced.html">Advanced</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../data_science.html">Data Science with Exasol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../environments.html">Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
@@ -88,7 +89,10 @@ data-aria-dark="Switch to auto color mode">
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-lucide close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
   <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
   <main class="sy-main w-full max-sm:max-w-full print:pt-6"><div class="sy-breadcrumbs" role="navigation">
@@ -122,6 +126,35 @@ data-aria-dark="Switch to auto color mode">
         <article class="yue" role="main">
           <section id="creating-and-running-udfs">
 <h1>Creating and running UDFs<a class="headerlink" href="#creating-and-running-udfs" title="Link to this heading">¶</a></h1>
+<p>In the CREATE SCRIPT command, you must define the type of input and output values.
+There are two types of UDF inputs (set and scalar) and two types of UDF outputs (returns and emits).
+These can be combined as needed to suite your use case.</p>
+<ul>
+<li><p>Input values</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>SCALAR</strong> Specifies that the script processes single input rows. The code is therefore called once per input row.</p></li>
+<li><p><strong>SET</strong> Specifies that the processing refers to a set of input rows. Within the code, you can iterate through those rows.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Output values</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>RETURNS</strong> Specifies that the script returns a single value.</p></li>
+<li><p><strong>EMITS</strong> Specifies that the script can create (emit) multiple result rows (tuples).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Each UDF script must contain the main function run(). This function is called with a parameter providing access to the input data of Exasol. If your script processes multiple input tuples (using SET), you can iterate through the single tuples using this parameter.
+You can specify an ORDER BY clause either when creating a script or when calling it. This clause sorts the processing of the groups of SET input data. If it is necessary for the algorithm, you should specify this clause when creating the script to avoid wrong results due to misuse.</p>
+<p>Input parameters in scripts are always case sensitive, similar to the script code. This is different to SQL identifiers, which are only case sensitive if they are delimited.</p>
+<p>You can use this <a class="reference external" href="https://htmlpreview.github.io/?https://github.com/EXASOL/script-languages/blob/master/udf-script-signature-generator/udf-script-signature-generator.html">UDF Generator</a> to help you get started building your own UDFs.</p>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<p>You can view examples of UDFs <a class="reference external" href="https://docs.exasol.com/db/latest/database_concepts/udf_scripts/udf_examples.htm">here</a>.</p>
+</section>
 </section>
 
         </article><button class="back-to-top" type="button">
