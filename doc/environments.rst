@@ -61,3 +61,9 @@ pyCharm
 -------
 
 Please follow the instructions of the official documentation of `pyCharm <https://www.jetbrains.com/help/pycharm/exasol.html>`_.
+
+
+VS Code
+-------
+
+To connect to Exasol install the plugin `Database Client JDBC <https://marketplace.visualstudio.com/items?itemName=cweijan.dbclient-jdbc>`_ from the marketplace.
