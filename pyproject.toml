@@ -30,7 +30,7 @@ packages  = [
 [tool.poetry.dependencies]
 
 [tool.poetry.group.dev.dependencies]
-exasol-toolbox = ">=0.12.0"
+exasol-toolbox = ">=1.4.0"
 
 [tool.coverage.run]
 source = [
