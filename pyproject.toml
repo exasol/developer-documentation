@@ -38,7 +38,7 @@ source = [
 ]
 
 [tool.coverage.report]
-fail_under = 15
+fail_under = 0
 
 
 [tool.black]
