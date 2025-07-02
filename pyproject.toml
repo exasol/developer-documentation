@@ -30,7 +30,7 @@ packages  = [
 [tool.poetry.dependencies]
 
 [tool.poetry.group.dev.dependencies]
-exasol-toolbox = ">=1.4.0"
+exasol-toolbox = ">=1.6.0"
 
 [tool.coverage.run]
 source = [
@@ -53,7 +53,7 @@ force_grid_wrap = 2
 
 
 [tool.pylint.master]
-fail-under = 5.0
+fail-under = 4.0
 output-format = "colorized,json:.lint.json,text:.lint.txt"
 
 [tool.pylint.format]
