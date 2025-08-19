@@ -1,9 +1,12 @@
 Data Science with Exasol
--------------------------
+=========================
 
 Exasol has significant capabilities for implementing data science workflows - from classic machine learning to Gen AI and language model solutions.
 
-The best way to get started is with `Exasol's AI Lab <https://github.com/exasol/ai-lab>`_.
+Exasol's AI-LAB
+-----------------
+The best way to get started is with Exasol's AI Lab.
+try it out here: <https://github.com/exasol/ai-lab>`_.
 
 This video walks through `getting started with AI Lab <https://www.youtube.com/watch?v=LkqdLlRF2Go>`_.
 
