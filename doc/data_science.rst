@@ -5,8 +5,12 @@ Exasol has significant capabilities for implementing data science workflows - fr
 
 Exasol's AI-LAB
 -----------------
-The best way to get started is with Exasol's AI Lab.
-try it out here: <https://github.com/exasol/ai-lab>`_.
+AI-LAB is a collection of interactive computational notebooks created by Exasol to showcase and demonstrate the capabilities of Exasol and it's infrastructure in context of Machine Learning and AI. 
+
+try it out here:
+^^^^^^^^^^^^^^^^^^
+`<https://github.com/exasol/ai-lab>`_.
+
 
 This video walks through `getting started with AI Lab <https://www.youtube.com/watch?v=LkqdLlRF2Go>`_.
 
