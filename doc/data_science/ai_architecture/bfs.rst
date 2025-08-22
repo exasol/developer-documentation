@@ -7,4 +7,4 @@ A BucketFS service contains a number of buckets that can store a number of files
 
 Each configured data disk in Exasol has a preinstalled BucketFS service with a default bucket. You can create additional BucketFS services as needed.
 
-
+For machine learning - BucketFS is used to store trained models and serve those to UDFs when generating inferences
