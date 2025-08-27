@@ -22,7 +22,7 @@ What AI-Lab can be used for?
 
 Here are some use cases for AI-Lab:
 
-Train Models with Data from Exasol and Do Inference Inside the Database
+Train Models with Data from Exasol and do Inference inside the Database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 This means using Exasol as the source for training machine learning models externally (e.g., with scikit-learn, TensorFlow, or PyTorch) and then deploying those models inside the database. Inference is done through User Defined Functions (UDFs), enabling efficient predictions directly via SQL without moving data out of Exasol.
 
