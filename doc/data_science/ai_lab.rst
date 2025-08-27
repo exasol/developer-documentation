@@ -26,7 +26,7 @@ Train Models with Data from Exasol and do Inference inside the Database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 This means using Exasol as the source for training machine learning models externally (e.g., with scikit-learn, TensorFlow, or PyTorch) and then deploying those models inside the database. Inference is done through User Defined Functions (UDFs), enabling efficient predictions directly via SQL without moving data out of Exasol.
 
-Use Transformers Extension and Text-AI to Do Text Analytics
+Use Transformers Extension and Text-AI to do Text Analytics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 This means applying Exasol’s Transformers and Text-AI extensions to run advanced NLP tasks (e.g., sentiment analysis, classification, entity recognition) directly within the database. By leveraging pre-trained transformer models, text analytics can be integrated into SQL workflows without moving data out of Exasol.
 
