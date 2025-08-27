@@ -1,7 +1,7 @@
 Parallel Processing for AI/ML
 ===============================
 
-Parallel Processing in Exasol means that computations are distributed across multiple nodes in the database cluster, allowing large datasets to be processed simultaneously rather than sequentially.
+Parallel Processing in Exasol means that computations are distributed across all nodes in the database cluster, allowing large datasets to be processed simultaneously rather than sequentially.
 
 In AI/ML workflows, MPP helps by:
 
