@@ -52,7 +52,7 @@ token <https://docs.exasol.com/saas/administration/access_mngt/access_token.htm>
    C = pyexasol.connect(dsn='<host:port>', user='sys', password='<token>')
 
 Finally you can also wrap all credentials into a `local config
-file <https://exasol.github.io/pyexasol/master/user_guide/local_config.html>`__:
+file <https://exasol.github.io/pyexasol/master/api.html>`__:
 
 .. code:: python
 
