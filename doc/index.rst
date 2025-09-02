@@ -9,11 +9,12 @@ Documentation and resources for data scientists and programmatic users to perfor
 
    getting_started
    data_ingestion
-   distributed_python/index.rst
-   data_science
+   UDF/index.rst
+   data_science/index.rst
    examples
    environments
    integrations
    faq
    how_edit_this_docu
    changes/changelog
+

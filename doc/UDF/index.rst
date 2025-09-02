@@ -1,5 +1,5 @@
-Distributed Python (UDFs)
-=========================
+User Defined Functions (UDFs)
+================================
 
 .. toctree::
    :maxdepth: 1
