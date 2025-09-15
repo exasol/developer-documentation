@@ -6,3 +6,5 @@ User Defined Functions are one of the most powerful features of Exasol. It offer
 Given the parallel architecture of the database, the model will be simultaneously computed on each node with a different partition of the data.
 
 The UDFs are backed by :doc:`BucketFS <./bfs>` - an Exasol proprietary replicated file system. This is where the model is usually stored. The file system is called replicated because the copies of all its files are stored at every node of the database cluster.
+
+Want to learn more about UDFs and it's usage and examples? Check out :ref:`overview-label`.
