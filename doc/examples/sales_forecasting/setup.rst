@@ -1,5 +1,6 @@
 .. _setup-sf:
 
+
 Setup
 ======
 
@@ -18,6 +19,7 @@ If this is your first time using `AI-Lab <https://github.com/exasol/ai-lab>`_, f
 * You have multiple database options: Docker (recommended), SaaS, and On-Prem.
 * The last cell creates a **schema** for you and ensures that you are connected to a database.
 * We can now proceed with our demo.
+
 
 Download the Sales Forecasting Demo File
 ------------------------------------------

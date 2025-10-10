@@ -28,7 +28,7 @@ What You'll Need
 
 You’ll need to:
 
-* Set up `AI-Lab <https://github.com/exasol/ai-lab>`_ (We recommend the Docker version because it comes with the Docker database. Alternatively, you can also use `Exasol SaaS <https://cloud.exasol.com>`_).
+* Set up `AI-Lab <https://github.com/exasol/ai-lab>`_ (We recommend the Docker version because it comes with the Docker database. Alternatively, you can use `Exasol SaaS <https://cloud.exasol.com>`_).
 * Download and import the notebooks zip file from :ref:`setup-sf`.
 
 What You'll Learn
