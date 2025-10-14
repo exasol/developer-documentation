@@ -11,6 +11,7 @@ Documentation and resources for data scientists and programmatic users to perfor
    data_ingestion
    UDF/index.rst
    data_science/index.rst
+   connect_to_exasol/index.rst
    examples/index.rst
    environments
    integrations
