@@ -39,9 +39,11 @@ Unzip Files in JupyterLab
 .. code-block:: python
 
     import zipfile as zf
-    files = zf.ZipFile("sales_forecasting.zip", 'r')
-    files.extractall('sales_forecasting')
-    files.close()
+
+    # Open the zip file
+    with zf.ZipFile("sales_forecasting (5).zip", 'r') as files:
+    # Extract all contents directly to the current directory
+    files.extractall()
 
 
 
