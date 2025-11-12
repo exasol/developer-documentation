@@ -8,6 +8,8 @@ Sales Forecasting
    setup.rst
   
 
+**Disclaimer: This demo can only work with AI-LAB 3.3.0 at the moment.**
+
 Overview
 ========
 
@@ -29,7 +31,7 @@ What You'll Need
 You’ll need to:
 
 * Set up `AI-Lab <https://github.com/exasol/ai-lab>`_ (We recommend the Docker version because it comes with the Docker database. Alternatively, you can use onPrem DB).
-* This version of the demo is not compatible with SaaS database.
+* **This version of the demo is not compatible with SaaS database.**
 * Download and import the notebooks zip file from :ref:`setup-sf`.
 
 What You'll Learn
