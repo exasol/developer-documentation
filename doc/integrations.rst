@@ -20,7 +20,7 @@ Connect to Exasol database using SQLAlchemy
     e = create_engine(url)
     r = e.execute("select 42 from dual").fetchall()
 
-Please also refer to `sqlalchemy exasol documentation <https://exasol.github.io/sqlalchemy-exasol/master/user_guide.html#user-guide>`_.
+Please also refer to `sqlalchemy exasol documentation <https://exasol.github.io/sqlalchemy-exasol/>`_.
 
 JupySQL
 -------

@@ -8,8 +8,6 @@ Sales Forecasting
    setup.rst
   
 
-**Disclaimer: This demo can only work with AI-LAB 3.3.0 at the moment.**
-
 Overview
 ========
 
