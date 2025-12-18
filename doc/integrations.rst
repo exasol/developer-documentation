@@ -31,7 +31,7 @@ Connect to Exasol database using SQLAlchemy
     with engine.connect() as con:
         result = con.execute(sql_text).fetchall()
 
-Please also refer to `sqlalchemy exasol documentation <https://exasol.github.io/sqlalchemy-exasol/master/user_guide/index.html>`_.
+Please also refer to the `sqlalchemy-exasol documentation <https://exasol.github.io/sqlalchemy-exasol/>`_.
 
 JupySQL
 -------
