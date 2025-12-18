@@ -1,7 +1,7 @@
 [project]
 name = "exasol-developer-documentation"
 version = "0.1.0"
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10,<4.0"
 description = "Documentation and resources for developing software and data science solutions and applications on top of the Exasol Analytics Engine."
 readme = "README.md"
 authors = [
@@ -30,7 +30,7 @@ packages  = [
 [tool.poetry.dependencies]
 
 [tool.poetry.group.dev.dependencies]
-exasol-toolbox = ">=1.6.0"
+exasol-toolbox = "^4.0.0"
 
 [tool.coverage.run]
 source = [
