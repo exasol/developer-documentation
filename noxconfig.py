@@ -8,5 +8,6 @@ PROJECT_CONFIG = BaseConfig(
     root_path=Path(__file__).parent,
     project_name="developer_documentation",
     # The developer-documentation does not run against any Exasol DBs.
-    exasol_versions=(),
+    # We put a dummy version here for the purposes of the tests running.
+    exasol_versions=("8.29.13",),
 )
