@@ -4,7 +4,7 @@ Integrations
 SQLAlchemy
 ----------
 
-Install SQLAlchemy 
+Install SQLAlchemy
 
 .. code-block:: python
 
@@ -15,12 +15,23 @@ Connect to Exasol database using SQLAlchemy
 
 .. code-block:: python
 
-    from sqlalchemy import create_engine
-    url = "exa+websocket://<user>:<password>@<host>:<port>/<schema>?CONNECTIONLCALL=en_US.UTF-8"
-    e = create_engine(url)
-    r = e.execute("select 42 from dual").fetchall()
+    from sqlalchemy import create_engine, text, URL
 
-Please also refer to `sqlalchemy exasol documentation <https://exasol.github.io/sqlalchemy-exasol/master/user_guide.html#user-guide>`_.
+    url_object = URL.create(
+        drivername="exa+websocket",
+        username="sys",
+        password="exasol",
+        host="127.0.0.1",
+        port="8563",
+    )
+
+    engine = create_engine(url_object)
+    # All literal text should be passed through `text()` before execution
+    sql_text = text("SELECT 42 FROM DUAL")
+    with engine.connect() as con:
+        result = con.execute(sql_text).fetchall()
+
+Please also refer to the `sqlalchemy-exasol documentation <https://exasol.github.io/sqlalchemy-exasol/>`_.
 
 JupySQL
 -------
@@ -33,7 +44,7 @@ Pandas
 Importing Data into Pandas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can fetch data from Exasol into a Pandas DataFrame using pyexasol. 
+You can fetch data from Exasol into a Pandas DataFrame using pyexasol.
 
 .. code-block:: python
 
