@@ -5,7 +5,7 @@ Self-Hosted AI Text Summarization
 Overview
 ========
 
-Learn how to invoke open source large language models (LLMs) directly from your Exasol database using UDFs and Ollama. This tutorial demonstrates a fully self-hosted AI pipeline where your data never leaves your infrastructure.
+Learn how to invoke open-source Large Language Models (LLMs) directly from your Exasol database using UDFs and Ollama. This tutorial demonstrates a fully self-hosted AI pipeline where your data never leaves your infrastructure.
 
 Why Self-Hosted?
 ----------------
