@@ -236,6 +236,7 @@ Returns just the summarized text. Best for:
    CREATE OR REPLACE PYTHON3 SCALAR SCRIPT DEMO.SUMMARIZE_ARTICLE(article_text VARCHAR(20000))
    RETURNS VARCHAR(2000) AS
 
+
    import requests
    import json
 
@@ -312,70 +313,72 @@ Next, we update the UDF to use the connection object:
 
 .. code-block:: text
 
-CREATE OR REPLACE PYTHON3 SCALAR SCRIPT DEMO.SUMMARIZE_ARTICLE_WITH_CONNECTION(
-    connection_name VARCHAR(200),
-    article_text VARCHAR(20000)
-)
-RETURNS VARCHAR(2000) AS
+   CREATE OR REPLACE PYTHON3 SCALAR SCRIPT DEMO.SUMMARIZE_ARTICLE_WITH_CONNECTION(
+      connection_name VARCHAR(200),
+      article_text VARCHAR(20000)
+   )
+   RETURNS VARCHAR(2000) AS
 
-import requests
-import json
 
-def run(ctx):
-    """
-    Summarizes article text using a local Ollama model via CONNECTION object.
-    
-    Args:
-        connection_name: Name of Exasol CONNECTION object with Ollama URL
-        article_text: Text to summarize
-    
-    Returns:
-        str: One-sentence summary, or error message if processing fails
-    """
-    text = ctx.article_text
-    
-    # Handle NULL or empty input
-    if text is None or text.strip() == '':
-        return None
-    
-    try:
-        # Get Ollama endpoint from CONNECTION object
-        conn_info = exa.get_connection(ctx.connection_name)
-        ollama_url = conn_info.address
-        
-        # Prepare request to Ollama API
-        payload = {
-            'model': 'mistral:latest',
-            'prompt': 'Summarize this news article in exactly one brief sentence: ' + text,
-            'stream': False,
-            'options': {
-                'temperature': 0.3,
-                'num_predict': 50
-            }
-        }
-        
-        response = requests.post(
-            ollama_url,
-            json=payload,
-            timeout=15
-        )
-        response.raise_for_status()
-        
-        result = response.json()
-        return result['response'].strip()
-        
-    except Exception as e:
-        return 'ERROR: ' + str(e)
-/
+   import requests
+   import json
+
+   def run(ctx):
+      """
+      Summarizes article text using a local Ollama model via CONNECTION object.
+      
+      Args:
+         connection_name: Name of Exasol CONNECTION object with Ollama URL
+         article_text: Text to summarize
+      
+      Returns:
+         str: One-sentence summary, or error message if processing fails
+      """
+      text = ctx.article_text
+      
+      # Handle NULL or empty input
+      if text is None or text.strip() == '':
+         return None
+      
+      try:
+         # Get Ollama endpoint from CONNECTION object
+         conn_info = exa.get_connection(ctx.connection_name)
+         ollama_url = conn_info.address
+         
+         # Prepare request to Ollama API
+         payload = {
+               'model': 'mistral:latest',
+               'prompt': 'Summarize this news article in exactly one brief sentence: ' + text,
+               'stream': False,
+               'options': {
+                  'temperature': 0.3,
+                  'num_predict': 50
+               }
+         }
+         
+         response = requests.post(
+               ollama_url,
+               json=payload,
+               timeout=15
+         )
+         response.raise_for_status()
+         
+         result = response.json()
+         return result['response'].strip()
+         
+      except Exception as e:
+         return 'ERROR: ' + str(e)
+   /
 
 Finally, we test the new UDF:
 
 .. code-block:: sql
+
    SELECT 
-    HEADING,
-    DEMO.SUMMARIZE_ARTICLE_WITH_CONNECTION('OLLAMA_CONNECTION', ARTICLE) as summary
-FROM DEMO.ARTICLES
-LIMIT 5;
+       HEADING,
+       DEMO.SUMMARIZE_ARTICLE_WITH_CONNECTION('OLLAMA_CONNECTION', ARTICLE) as summary
+   FROM DEMO.ARTICLES
+   LIMIT 5;
 
 Advanced UDF: Summary + Timing
 -------------------------------
@@ -392,78 +395,78 @@ Best for:
 
 .. code-block:: text
 
-CREATE OR REPLACE PYTHON3 SET SCRIPT DEMO.SUMMARIZE_ARTICLE_WITH_TIMING(
-   connection_name VARCHAR(200),
-   heading VARCHAR(1000),
-   article_text VARCHAR(20000)
-)
-EMITS (heading VARCHAR(1000), summary VARCHAR(2000), duration_seconds DOUBLE) AS
+   CREATE OR REPLACE PYTHON3 SET SCRIPT DEMO.SUMMARIZE_ARTICLE_WITH_TIMING(
+      connection_name VARCHAR(200),
+      heading VARCHAR(1000),
+      article_text VARCHAR(20000)
+   )
+   EMITS (heading VARCHAR(1000), summary VARCHAR(2000), duration_seconds DOUBLE) AS
 
-import requests
-import json
 
-def run(ctx):
-    """
-    Summarizes articles and tracks execution time, using CONNECTION object.
-    
-    Args:
-        connection_name: Name of Exasol CONNECTION object with Ollama URL
-        heading: Article heading (identifier)
-        article_text: Text to summarize
-    
-    Emits:
-        heading (str): Original article heading
-        summary (str): One-sentence summary
-        duration_seconds (float): Processing time from Ollama
-    """
-    # Get Ollama endpoint from CONNECTION object (once, outside the loop)
-    conn_info = exa.get_connection(ctx.connection_name)
-    ollama_url = conn_info.address
-    
-    while True:
-        heading = ctx.heading
-        text = ctx.article_text
-        
-        # Handle NULL input
-        if text is None:
-            ctx.emit(heading, None, None)
-            if not ctx.next():
-                break
-            continue
-        
-        try:
-            payload = {
-                'model': 'mistral:latest',
-                'prompt': 'Summarize this news article in exactly one brief sentence: ' + text,
-                'stream': False,
-                'options': {
-                    'temperature': 0.3,
-                    'num_predict': 50
-                }
-            }
-            
-            response = requests.post(
-                ollama_url,
-                json=payload,
-                timeout=15
-            )
-            response.raise_for_status()
-            result = response.json()
-            
-            # Extract timing (nanoseconds → seconds)
-            duration = float(result.get('total_duration', 0)) / 1000000000.0
-            summary = result['response'].strip()
-            
-            # Emit all three values
-            ctx.emit(heading, summary, duration)
-            
-        except Exception as e:
-            ctx.emit(heading, 'ERROR: ' + str(e), 0.0)
-        
-        if not ctx.next():
-            break
-/
+   import requests
+   import json
 
+   def run(ctx):
+       """
+       Summarizes articles and tracks execution time, using CONNECTION object.
+       
+       Args:
+           connection_name: Name of Exasol CONNECTION object with Ollama URL
+           heading: Article heading (identifier)
+           article_text: Text to summarize
+       
+       Emits:
+           heading (str): Original article heading
+           summary (str): One-sentence summary
+           duration_seconds (float): Processing time from Ollama
+       """
+       # Get Ollama endpoint from CONNECTION object (once, outside the loop)
+       conn_info = exa.get_connection(ctx.connection_name)
+       ollama_url = conn_info.address
+       
+       while True:
+           heading = ctx.heading
+           text = ctx.article_text
+           
+           # Handle NULL input
+           if text is None:
+               ctx.emit(heading, None, None)
+               if not ctx.next():
+                   break
+               continue
+           
+           try:
+               payload = {
+                   'model': 'mistral:latest',
+                   'prompt': 'Summarize this news article in exactly one brief sentence: ' + text,
+                   'stream': False,
+                   'options': {
+                       'temperature': 0.3,
+                       'num_predict': 50
+                   }
+               }
+               
+               response = requests.post(
+                   ollama_url,
+                   json=payload,
+                   timeout=15
+               )
+               response.raise_for_status()
+               result = response.json()
+               
+               # Extract timing (nanoseconds → seconds)
+               duration = float(result.get('total_duration', 0)) / 1000000000.0
+               summary = result['response'].strip()
+               
+               # Emit all three values
+               ctx.emit(heading, summary, duration)
+               
+           except Exception as e:
+               ctx.emit(heading, 'ERROR: ' + str(e), 0.0)
+           
+           if not ctx.next():
+               break
+   /
 .. warning::
    UDF scripts process the **entire input table**. You must explicitly 
    limit the data before calling the UDF using temp tables or WHERE clauses.
@@ -500,7 +503,7 @@ Next Steps
 ==========
 
 Expand UDF & Analytics tasks
-----------------
+-----------------------------
 
 * Monitor summarization performance over time using duration.
 * Add enhanced error handling for better debugging experience.

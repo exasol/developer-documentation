@@ -7,4 +7,4 @@ Given the parallel architecture of the database, the model will be simultaneousl
 
 The UDFs are backed by :doc:`BucketFS <./bfs>` - an Exasol proprietary replicated file system. This is where the model is usually stored. The file system is called replicated because the copies of all its files are stored at every node of the database cluster.
 
-Want to learn more about UDFs and it's usage and examples? Check out :ref:`overview-label`.
+Want to learn more about UDFs and it's usage and examples? Check out :doc:`../../UDF/index`.
