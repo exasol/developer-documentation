@@ -295,10 +295,93 @@ Returns just the summarized text. Best for:
 .. note::
    The first time you call the UDF, Ollama may take a few extra seconds to load the model into memory.
 
+Adding a reusable Ollama Connection
+-------------------------------------
+For the Ollama connection we can create an `connection object within Exasol <https://docs.exasol.com/db/latest/sql/create_connection.htm>`_.
+This securely stores connection information and allows us to reuse the connection without hardcoding the details into the UDF.
+
+First we build the connection object: 
+
+.. code-block:: sql
+
+   CREATE OR REPLACE CONNECTION OLLAMA_CONNECTION
+   TO 'http://10.0.0.186:11434/api/generate'
+   IDENTIFIED BY '';  -- No authentication needed
+
+Next, we update the UDF to use the connection object:
+
+.. code-block:: text
+
+CREATE OR REPLACE PYTHON3 SCALAR SCRIPT DEMO.SUMMARIZE_ARTICLE_WITH_CONNECTION(
+    connection_name VARCHAR(200),
+    article_text VARCHAR(20000)
+)
+RETURNS VARCHAR(2000) AS
+
+import requests
+import json
+
+def run(ctx):
+    """
+    Summarizes article text using a local Ollama model via CONNECTION object.
+    
+    Args:
+        connection_name: Name of Exasol CONNECTION object with Ollama URL
+        article_text: Text to summarize
+    
+    Returns:
+        str: One-sentence summary, or error message if processing fails
+    """
+    text = ctx.article_text
+    
+    # Handle NULL or empty input
+    if text is None or text.strip() == '':
+        return None
+    
+    try:
+        # Get Ollama endpoint from CONNECTION object
+        conn_info = exa.get_connection(ctx.connection_name)
+        ollama_url = conn_info.address
+        
+        # Prepare request to Ollama API
+        payload = {
+            'model': 'mistral:latest',
+            'prompt': 'Summarize this news article in exactly one brief sentence: ' + text,
+            'stream': False,
+            'options': {
+                'temperature': 0.3,
+                'num_predict': 50
+            }
+        }
+        
+        response = requests.post(
+            ollama_url,
+            json=payload,
+            timeout=15
+        )
+        response.raise_for_status()
+        
+        result = response.json()
+        return result['response'].strip()
+        
+    except Exception as e:
+        return 'ERROR: ' + str(e)
+/
+
+Finally, we test the new UDF:
+
+.. code-block:: sql
+   SELECT 
+    HEADING,
+    DEMO.SUMMARIZE_ARTICLE_WITH_CONNECTION('OLLAMA_CONNECTION', ARTICLE) as summary
+FROM DEMO.ARTICLES
+LIMIT 5;
+
 Advanced UDF: Summary + Timing
 -------------------------------
 
-Returns both summary and execution duration. Best for:
+Returns both summary and execution duration. Used the Ollama connection object. Also includes the header for unique row identification (future iterations could include row id).
+Best for:
 
 * Performance monitoring
 * Batch processing workflows
@@ -309,65 +392,80 @@ Returns both summary and execution duration. Best for:
 
 .. code-block:: text
 
-   CREATE OR REPLACE PYTHON3 SET SCRIPT DEMO.SUMMARIZE_ARTICLE_WITH_TIMING(article_text VARCHAR(20000))
-   EMITS (summary VARCHAR(2000), duration_seconds DOUBLE) AS
+CREATE OR REPLACE PYTHON3 SET SCRIPT DEMO.SUMMARIZE_ARTICLE_WITH_TIMING(
+   connection_name VARCHAR(200),
+   heading VARCHAR(1000),
+   article_text VARCHAR(20000)
+)
+EMITS (heading VARCHAR(1000), summary VARCHAR(2000), duration_seconds DOUBLE) AS
 
-   import requests
-   import json
+import requests
+import json
 
-   def run(ctx):
-       """
-       Summarizes articles and tracks execution time.
-       
-       Emits:
-           summary (str): One-sentence summary
-           duration_seconds (float): Processing time from Ollama
-       """
-       while True:
-           text = ctx.article_text
-           
-           # Handle NULL input
-           if text is None:
-               ctx.emit(None, None)
-               if not ctx.next():
-                   break
-               continue
-           
-           try:
-               payload = {
-                   'model': 'mistral:latest',
-                   'prompt': 'Summarize this news article in exactly one brief sentence: ' + text,
-                   'stream': False,
-                   'options': {
-                       'temperature': 0.3,
-                       'num_predict': 50
-                   }
-               }
-               
-               # IMPORTANT: Replace 10.0.0.186 with YOUR IP
-               response = requests.post(
-                   'http://10.0.0.186:11434/api/generate',
-                   json=payload,
-                   timeout=15
-               )
-               response.raise_for_status()
-               result = response.json()
-               
-               # Extract timing (nanoseconds → seconds)
-               duration = float(result.get('total_duration', 0)) / 1000000000.0
-               summary = result['response'].strip()
-               
-               ctx.emit(summary, duration)
-               
-           except Exception as e:
-               ctx.emit('ERROR: ' + str(e), 0.0)
-           
-           if not ctx.next():
-               break
-   /
+def run(ctx):
+    """
+    Summarizes articles and tracks execution time, using CONNECTION object.
+    
+    Args:
+        connection_name: Name of Exasol CONNECTION object with Ollama URL
+        heading: Article heading (identifier)
+        article_text: Text to summarize
+    
+    Emits:
+        heading (str): Original article heading
+        summary (str): One-sentence summary
+        duration_seconds (float): Processing time from Ollama
+    """
+    # Get Ollama endpoint from CONNECTION object (once, outside the loop)
+    conn_info = exa.get_connection(ctx.connection_name)
+    ollama_url = conn_info.address
+    
+    while True:
+        heading = ctx.heading
+        text = ctx.article_text
+        
+        # Handle NULL input
+        if text is None:
+            ctx.emit(heading, None, None)
+            if not ctx.next():
+                break
+            continue
+        
+        try:
+            payload = {
+                'model': 'mistral:latest',
+                'prompt': 'Summarize this news article in exactly one brief sentence: ' + text,
+                'stream': False,
+                'options': {
+                    'temperature': 0.3,
+                    'num_predict': 50
+                }
+            }
+            
+            response = requests.post(
+                ollama_url,
+                json=payload,
+                timeout=15
+            )
+            response.raise_for_status()
+            result = response.json()
+            
+            # Extract timing (nanoseconds → seconds)
+            duration = float(result.get('total_duration', 0)) / 1000000000.0
+            summary = result['response'].strip()
+            
+            # Emit all three values
+            ctx.emit(heading, summary, duration)
+            
+        except Exception as e:
+            ctx.emit(heading, 'ERROR: ' + str(e), 0.0)
+        
+        if not ctx.next():
+            break
+/
 
 .. warning::
-   SET scripts with EMITS process the **entire input table**. You must explicitly 
+   UDF scripts process the **entire input table**. You must explicitly 
    limit the data before calling the UDF using temp tables or WHERE clauses.
 
 Results
@@ -398,169 +496,15 @@ Sample output from our test run with 5 articles:
 * Range: 1.37s to 2.83s
 * Consistent quality across different article types
 
-Example Queries
-===============
-
-Simple Summarization
---------------------
-
-.. code-block:: sql
-
-   -- Summarize sports articles
-   SELECT 
-       HEADING,
-       DEMO.SUMMARIZE_ARTICLE(ARTICLE) as summary
-   FROM DEMO.ARTICLES
-   WHERE news_type = 'sports'
-   LIMIT 10;
-
-Batch Processing with Timing
------------------------------
-
-.. code-block:: sql
-
-   -- Process business news in controlled batch
-   CREATE OR REPLACE TABLE DEMO.BUSINESS_SAMPLE AS
-   SELECT * FROM DEMO.ARTICLES 
-   WHERE news_type = 'business'
-   LIMIT 20;
-
-   SELECT 
-       SUMMARIZE_ARTICLE_WITH_TIMING(ARTICLE)
-   FROM DEMO.BUSINESS_SAMPLE;
-
-Performance Analysis
---------------------
-
-.. code-block:: sql
-
-   -- Analyze relationship between article length and processing time
-   CREATE OR REPLACE TABLE DEMO.PERF_ANALYSIS AS
-   SELECT 
-       LENGTH(ARTICLE) as article_length,
-       ARTICLE
-   FROM DEMO.ARTICLES
-   LIMIT 50;
-
-   SELECT 
-       MIN(s.duration_seconds) as min_duration,
-       AVG(s.duration_seconds) as avg_duration,
-       MAX(s.duration_seconds) as max_duration,
-       AVG(LENGTH(a.ARTICLE)) as avg_article_length
-   FROM DEMO.PERF_ANALYSIS a,
-        TABLE(DEMO.SUMMARIZE_ARTICLE_WITH_TIMING(a.ARTICLE)) s;
-
-Production Considerations
-=========================
-
-Error Handling
---------------
-
-For production use you can add enhanced error handling to your functions:
-
-.. code-block:: python
-
-   try:
-       response = requests.post(...)
-   except requests.exceptions.Timeout:
-       return 'TIMEOUT: Request exceeded 15 seconds'
-   except requests.exceptions.ConnectionError:
-       return 'CONNECTION_ERROR: Cannot reach Ollama'
-   except requests.exceptions.HTTPError as e:
-       return f'HTTP_ERROR: {e.response.status_code}'
-   except Exception as e:
-       return f'UNKNOWN_ERROR: {str(e)}'
-
-Caching Strategy
-----------------
-
-Cache summaries to avoid reprocessing:
-
-.. code-block:: sql
-
-   -- Create cache table
-   CREATE TABLE DEMO.SUMMARY_CACHE (
-       article_hash VARCHAR(64),
-       summary VARCHAR(2000),
-       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-       PRIMARY KEY (article_hash)
-   );
-
-   -- Check cache before calling UDF
-   SELECT 
-       CASE 
-           WHEN c.summary IS NOT NULL THEN c.summary
-           ELSE DEMO.SUMMARIZE_ARTICLE(a.ARTICLE)
-       END as summary
-   FROM DEMO.ARTICLES a
-   LEFT JOIN DEMO.SUMMARY_CACHE c 
-       ON HASH_SHA256(a.ARTICLE) = c.article_hash;
-
-Monitoring
-----------
-
-Track UDF performance over time:
-
-.. code-block:: sql
-
-   -- Create metrics table
-   CREATE TABLE DEMO.UDF_METRICS (
-       execution_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-       article_id VARCHAR(100),
-       duration_seconds DOUBLE,
-       success BOOLEAN
-   );
-
-   -- Log each execution (modify UDF to emit metrics)
-
-Resource Management
--------------------
-
-**Ollama Configuration:**
-
-Limit Ollama's resource usage:
-
-.. code-block:: bash
-
-   # Limit to 4 CPU cores
-   export OLLAMA_NUM_THREADS=4
-   
-   # Set max memory (in GB)
-   export OLLAMA_MAX_LOADED_MODELS=1
-
-**Batch Processing:**
-
-Process large datasets in manageable chunks:
-
-.. code-block:: sql
-
-   -- Process 100 articles at a time
-   CREATE OR REPLACE TABLE DEMO.BATCH_1 AS
-   SELECT * FROM DEMO.ARTICLES WHERE ROWNUM BETWEEN 1 AND 100;
-   
-   SELECT SUMMARIZE_ARTICLE_WITH_TIMING(ARTICLE) FROM DEMO.BATCH_1;
-   
-   -- Wait, then process next batch
-   CREATE OR REPLACE TABLE DEMO.BATCH_2 AS
-   SELECT * FROM DEMO.ARTICLES WHERE ROWNUM BETWEEN 101 AND 200;
-
-Security Considerations
------------------------
-
-**Network Security:**
-
-* Use firewall rules to restrict Ollama port access
-* Consider VPN for multi-machine setups
-* Don't expose Ollama to public internet
-
-**Data Privacy:**
-
-* All processing happens locally—no data sent to external APIs
-* Models are downloaded once and run offline
-* Audit data access through Exasol's built-in logging
-
 Next Steps
 ==========
+
+Expand UDF & Analytics tasks
+----------------
+
+* Monitor summarization performance over time using duration.
+* Add enhanced error handling for better debugging experience.
+* Cache summarized responses to only generate summaries for new articles.
 
 Extend the Concept
 ------------------
