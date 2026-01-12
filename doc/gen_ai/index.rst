@@ -1,7 +1,7 @@
 Generative AI
 =============
 
-Examples and tutorials for using generative AI and large language models with Exasol.
+Examples and tutorials for using generative AI and Large Language Models (LLMs) with Exasol.
 
 .. toctree::
    :maxdepth: 2
