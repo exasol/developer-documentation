@@ -608,11 +608,6 @@ Resources
 * `Ollama API Reference <https://github.com/ollama/ollama/blob/main/docs/api.md>`_
 * `Mistral AI Documentation <https://docs.mistral.ai/>`_
 
-**Community:**
-
-* `Exasol Community <https://community.exasol.com/>`_
-* `Ollama Discord <https://discord.gg/ollama>`_
-
 Feedback
 ========
 
