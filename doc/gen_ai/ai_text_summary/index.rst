@@ -99,7 +99,16 @@ Create Schema and Table
 Import CSV Data
 ---------------
 
-:download:`Download articles_data.csv <./articles_data.csv>` and import it:
+You can import the data directly from the URL:
+
+.. code-block:: sql
+
+   IMPORT INTO DEMO.ARTICLES
+   FROM CSV AT 'https://dut5tonqye28.cloudfront.net/ai_lab/gen-ai/articles_data.csv'
+   COLUMN SEPARATOR = ','
+   SKIP = 1;  -- Skip header row
+
+Alternatively, `download articles_data.csv <https://dut5tonqye28.cloudfront.net/ai_lab/gen-ai/articles_data.csv>`_ and import it locally:
 
 .. code-block:: sql
 
