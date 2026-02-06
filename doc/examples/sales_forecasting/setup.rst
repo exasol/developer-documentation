@@ -23,7 +23,7 @@ If this is your first time using `AI-Lab <https://github.com/exasol/ai-lab>`_, f
 Download the Sales Forecasting Demo File
 ------------------------------------------
 
-* :download:`Download the .zip file<./sales_forecasting.zip>`.
+* :download:`Download the .zip file<./sales_forecasting_demo.zip>`.
 * **Extract** the contents of the .zip file using your file explorer.
 * **Create** a folder inside the root folder of AI-Lab and name it "sales_forecasting".
 * **Upload** the files inside extracted folder into the "sales_forecasting" folder. Using the import button on the top right. 

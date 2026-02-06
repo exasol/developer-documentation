@@ -7,6 +7,7 @@ Examples
 
    
    sales_forecasting/index.rst
+   kafka-connector/index.rst
    
    
 
