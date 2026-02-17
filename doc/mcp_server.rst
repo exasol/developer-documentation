@@ -1,4 +1,4 @@
-MCP Server - Query Exasol with Natural Language
+MCP Server
 ================================================
 
 The Exasol MCP (Model Context Protocol) Server enables you to interact with your Exasol database using plain English - no SQL knowledge required. It integrates seamlessly with AI assistants like Claude Desktop, allowing you to ask questions about your data in natural language and get results instantly.
