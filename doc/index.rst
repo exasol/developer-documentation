@@ -12,6 +12,7 @@ Documentation and resources for data scientists and programmatic users to perfor
    UDF/index.rst
    data_science/index.rst
    gen_ai/index.rst
+   mcp_server
    connect_to_exasol/index.rst
    examples/index.rst
    environments
