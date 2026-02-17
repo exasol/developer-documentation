@@ -51,7 +51,7 @@ Prerequisites
 Before getting started, ensure you have:
 
 * Python 3.10 or higher
-* An MCP Client application (e.g., `Claude Desktop <https://claude.ai/download>`__)
+* An MCP Client application (e.g., `Claude Desktop <https://claude.com/download>`__)
 * The ``uv`` package manager
 
 Installing uv
@@ -263,7 +263,7 @@ Learn More
 
 * `MCP Server Documentation <https://exasol.github.io/mcp-server/>`__
 * `GitHub Repository <https://github.com/exasol/mcp-server>`__
-* `Model Context Protocol Specification <https://modelcontextprotocol.io/>`__
+* `Model Context Protocol Specification <https://modelcontextprotocol.io/docs/getting-started/intro/>`__
 
 Feedback
 ----------
