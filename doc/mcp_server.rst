@@ -266,7 +266,7 @@ Learn More
 * `Model Context Protocol Specification <https://modelcontextprotocol.io/>`__
 
 Feedback
-========
+----------
 
 * Contact us on the `Exasol Community <https://community.exasol.com/>`__
 
