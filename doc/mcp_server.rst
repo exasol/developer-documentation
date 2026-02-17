@@ -265,3 +265,8 @@ Learn More
 * `GitHub Repository <https://github.com/exasol/mcp-server>`__
 * `Model Context Protocol Specification <https://modelcontextprotocol.io/>`__
 
+Feedback
+========
+
+* Contact us on the `Exasol Community <https://community.exasol.com/>`__
+
