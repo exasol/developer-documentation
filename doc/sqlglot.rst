@@ -12,12 +12,6 @@ Install SQLGlot
 
     pip install sqlglot
 
-Try it online
--------------
-
-You can test SQL dialect conversion directly in the browser using SQLingual:
-`SQLingual app <https://sqlingual.streamlit.app/>`_.
-
 Convert another dialect to Exasol
 ---------------------------------
 
@@ -63,3 +57,22 @@ Practical note
 --------------
 
 Not every SQL feature has a 1:1 equivalent across all engines. Always test transpiled SQL in the target environment.
+
+Try it online
+-------------
+
+You can test SQL dialect conversion directly in the browser using SQLingual.
+
+.. raw:: html
+
+    <iframe
+      src="https://sqlingual.streamlit.app/?embed=true"
+      width="100%"
+      height="800"
+      loading="lazy"
+      title="SQLingual Streamlit App"
+      style="border: 1px solid #d0d7de; border-radius: 8px;"
+    ></iframe>
+
+If the embedded app does not load in your browser, open it directly:
+`here <https://sqlingual.streamlit.app/>`_.
