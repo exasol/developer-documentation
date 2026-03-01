@@ -16,7 +16,7 @@ Documentation and resources for data scientists and programmatic users to perfor
    examples/index.rst
    environments
    integrations
+   sqlglot
    faq
    how_edit_this_docu
    changes/changelog
-
