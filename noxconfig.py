@@ -1,26 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
-from dataclasses import dataclass
 from pathlib import Path
 
+from exasol.toolbox.config import BaseConfig
 
-@dataclass(frozen=True)
-class Config:
-    root: Path = Path(__file__).parent
-    doc: Path = Path(__file__).parent / "doc"
-    source: Path = Path("exasol/developer_documentation")
-    version_file: Path = (
-        Path(__file__).parent / "exasol" / "developer_documentation" / "version.py"
-    )
-    path_filters: Iterable[str] = (
-        "dist",
-        ".eggs",
-        "venv",
-    )
-    python_versions = ["3.9", "3.10", "3.11", "3.12", "3.13"]
-
-    plugins = []
-
-
-PROJECT_CONFIG = Config()
+PROJECT_CONFIG = BaseConfig(
+    root_path=Path(__file__).parent,
+    project_name="developer_documentation",
+    python_versions=("3.10", "3.11", "3.12", "3.13", "3.14"),
+    # The developer-documentation does not run against any Exasol DBs.
+    # We put a dummy version here for the purposes of the tests running.
+    exasol_versions=("8.29.13",),
+)

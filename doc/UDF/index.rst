@@ -1,10 +1,9 @@
-.. _overview-label:
 
 User Defined Functions (UDFs)
 ================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    intro
    usage

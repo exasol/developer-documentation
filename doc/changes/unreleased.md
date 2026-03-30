@@ -11,3 +11,5 @@
 
 * Relocked dependencies for vulnerability in requests & setuptools
 * #18: Updated to PTB 1.6.0 with link checker & relocked dependencies for vulnerabilities in urllib3, requests, & setuptools
+* #32: Relocked transitive dependencies for vulnerability in filelock, pip, and urllib3
+* #33: Updated to PTB 4.0.0 & dropped support for Python 3.9 (EOL was 2025-10)

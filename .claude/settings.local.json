@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Read(//c/Users/mufa/documents/developer-documentation/$APPDATA/Claude/**)",
+      "Read(//c/Users/mufa/documents/developer-documentation/$HOME/AppData/Roaming/Claude/**)",
+      "Bash(claude mcp:*)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(list\\(d.keys\\(\\)\\), indent=2\\)\\)\")",
+      "Bash(python3:*)",
+      "mcp__exasol_db__list_schemas",
+      "mcp__exasol_db__list_tables",
+      "Read(//c/Users/mufa/.claude/skills//**)",
+      "Read(//c/Users/mufa/.claude//**)",
+      "Bash(mkdir -p /c/Users/mufa/.claude/skills/exasol-developer-guide-creator)",
+      "Bash(mv /c/Users/mufa/.claude/skills/exasol-explore /c/Users/mufa/.claude/skills/exasol-developer-guide-creator/)",
+      "Bash(mv /c/Users/mufa/.claude/skills/exasol-new /c/Users/mufa/.claude/skills/exasol-developer-guide-creator/)",
+      "Bash(mv /c/Users/mufa/.claude/skills/exasol-modify /c/Users/mufa/.claude/skills/exasol-developer-guide-creator/)",
+      "Bash(mv /c/Users/mufa/.claude/skills/exasol-implement /c/Users/mufa/.claude/skills/exasol-developer-guide-creator/)"
+    ]
+  }
+}
