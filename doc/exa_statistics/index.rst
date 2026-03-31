@@ -1,6 +1,6 @@
-==========================================
+===========================================
 EXA_STATISTICS: Database Monitoring & Audit
-==========================================
+===========================================
 
 ``EXA_STATISTICS`` is a built-in system schema present in every Exasol database. It automatically
 collects and stores historical data about query activity, resource usage, database size, and user
