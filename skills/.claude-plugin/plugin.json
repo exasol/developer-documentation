@@ -1,0 +1,9 @@
+{
+  "name": "exasol-developer-guide-skills",
+  "description": "A plugin that provides skills to create and modify the Exasol Developer Guide.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Muhammad Abdullah Farooqui"
+  },
+  "repository": "https://github.com/exasol-labs/exasol-developer-guide-skills"
+}

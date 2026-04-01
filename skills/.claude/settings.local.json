@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(gh pr:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(grep -E '\\\\.\\(md|json\\)$')"
+    ]
+  }
+}
