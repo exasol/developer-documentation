@@ -560,7 +560,7 @@ Explore Ollama's model library:
 Example: Sentiment Classification with Gemma 4
 ------------------------------------------------
 
-Google's `Gemma 4 <https://ollama.com/library/gemma4>`_ works well for classification tasks and supports 140+ languages out of the box. The ``e4b`` variant (4.5B effective parameters, Apache 2.0 license) is a good fit for UDF workloads.
+Google's `Gemma 4 <https://ollama.com/library/gemma4>`_ works well for classification tasks and supports 35+ languages out of the box. The ``e4b`` variant (4B effective parameters, Apache 2.0 license) is a good fit for UDF workloads.
 
 Download the model:
 
@@ -639,7 +639,7 @@ Expected output:
    * - 3
      - POSITIVE
 
-Gemma 4 handles multilingual input without translation or separate models. You can swap in German, Spanish, Japanese, or any of its 140+ supported languages and the same UDF works unchanged.
+Gemma 4 handles multilingual input without translation or separate models. You can swap in German, Spanish, Japanese, or any of its 35+ natively supported languages and the same UDF works unchanged.
 
 Optimize Performance
 --------------------
