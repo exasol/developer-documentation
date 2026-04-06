@@ -557,6 +557,90 @@ Explore Ollama's model library:
    # Smaller, faster models
    ollama pull phi3
 
+Example: Sentiment Classification with Gemma 4
+------------------------------------------------
+
+Google's `Gemma 4 <https://ollama.com/library/gemma4>`_ works well for classification tasks and supports 140+ languages out of the box. The ``e4b`` variant (4.5B effective parameters, Apache 2.0 license) is a good fit for UDF workloads.
+
+Download the model:
+
+.. code-block:: bash
+
+   ollama pull gemma4:e4b
+
+Create a CONNECTION object and a lightweight UDF:
+
+.. code-block:: sql
+
+   -- Store the Ollama endpoint in a CONNECTION object
+   CREATE OR REPLACE CONNECTION OLLAMA_CONNECTION
+       TO 'http://YOUR_IP:11434';
+
+.. code-block:: text
+
+   CREATE OR REPLACE PYTHON3 SCALAR SCRIPT DEMO.OLLAMA_QUERY(prompt VARCHAR(10000))
+   RETURNS VARCHAR(10000) AS
+   import json
+   import urllib.request
+
+   def run(ctx):
+       conn = exa.get_connection('OLLAMA_CONNECTION')
+       payload = json.dumps({
+           'model': 'gemma4:e4b',
+           'prompt': ctx.prompt,
+           'stream': False
+       }).encode()
+       req = urllib.request.Request(
+           conn.address + '/api/generate',
+           data=payload,
+           headers={'Content-Type': 'application/json'}
+       )
+       with urllib.request.urlopen(req, timeout=120) as resp:
+           return json.loads(resp.read())['response']
+   /
+
+.. important::
+   Replace ``YOUR_IP`` with your machine's IP address, as described in Step 4.
+
+Now classify sentiment directly in SQL:
+
+.. code-block:: sql
+
+   CREATE OR REPLACE TABLE DEMO.FEEDBACK (
+       id INTEGER,
+       text_val VARCHAR(1000)
+   );
+
+   INSERT INTO DEMO.FEEDBACK VALUES
+   (1, 'The dashboard loads fast now. Great improvement.'),
+   (2, 'Installation was very complicated. Documentation is outdated.'),
+   (3, 'Support responded in under an hour. Excellent service.');
+
+   SELECT id,
+          DEMO.OLLAMA_QUERY(
+              'Classify sentiment as POSITIVE, NEGATIVE, or NEUTRAL. One word only. Text: '
+              || text_val
+          ) AS sentiment
+   FROM DEMO.FEEDBACK
+   ORDER BY id;
+
+Expected output:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 10 90
+
+   * - ID
+     - Sentiment
+   * - 1
+     - POSITIVE
+   * - 2
+     - NEGATIVE
+   * - 3
+     - POSITIVE
+
+Gemma 4 handles multilingual input without translation or separate models. You can swap in German, Spanish, Japanese, or any of its 140+ supported languages and the same UDF works unchanged.
+
 Optimize Performance
 --------------------
 
@@ -616,6 +700,7 @@ Resources
 * `Ollama GitHub <https://github.com/ollama/ollama>`_
 * `Ollama API Reference <https://github.com/ollama/ollama/blob/main/docs/api.md>`_
 * `Mistral AI Documentation <https://docs.mistral.ai/>`_
+* `Gemma 4 on Ollama <https://ollama.com/library/gemma4>`_
 
 Feedback
 ========
@@ -624,4 +709,4 @@ Feedback
 
 ---
 
-*Last updated: January 2026*
+*Last updated: April 2026*
