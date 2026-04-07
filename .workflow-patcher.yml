@@ -1,0 +1,15 @@
+workflows:
+  - name: report
+    step_customizations:
+      - action: REPLACE
+        job: report
+        step_id: upload-to-sonar
+        content:
+          # Currently, there is no code present in the developer documentation, so
+          # we do not need it evaluated by Sonar.
+          - name: Upload to Sonar
+            if: false
+            id: upload-to-sonar
+            env:
+              SONAR_TOKEN: "${{ secrets.SONAR_TOKEN }}"
+            run: poetry run -- nox -s sonar:check
