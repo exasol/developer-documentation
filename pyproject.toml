@@ -1,15 +1,24 @@
 [project]
 name = "exasol-developer-documentation"
 version = "0.1.0"
-requires-python = ">=3.10,<4.0"
 description = "Documentation and resources for developing software and data science solutions and applications on top of the Exasol Analytics Engine."
+authors = [{ name = "Torsten Kilias", email = "torsten.kilias@exasol.com" }]
+requires-python = ">=3.10,<4.0"
 readme = "README.md"
-authors = [
-    {name="Torsten Kilias", email="torsten.kilias@exasol.com"}
-]
 license = "MIT"
-keywords = ['exasol', 'developer_documentation']
-dynamic = ["dependencies"]
+keywords = [
+    "exasol",
+    "developer_documentation",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = []
 
 [project.urls]
 repository = "https://github.com/exasol/developer-documentation"
@@ -17,20 +26,18 @@ homepage = "https://github.com/exasol/developer-documentation"
 
 [build-system]
 requires = [
-    "poetry>=2.1.0",
+    "poetry>=2.3.0",
 ]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = ["exasol-toolbox>=6.1.1,<7"]
 
 [tool.poetry]
 requires-poetry = ">=2.1.0"
 packages  = [
     {include = "exasol"},
 ]
-
-[tool.poetry.dependencies]
-
-[tool.poetry.group.dev.dependencies]
-exasol-toolbox = "^4.0.0"
 
 [tool.coverage.run]
 source = [
@@ -52,10 +59,10 @@ force_grid_wrap = 2
 
 [tool.ruff.lint]
 extend-ignore = [
-    "E",      # Syntax errors
-    "F",      # Pyflakes rules (excluding F401)
-    "UP",     # pyupgrade rules
-    "D",      # Docstring rules
+    "E", # Syntax errors
+    "F", # Pyflakes rules (excluding F401)
+    "UP", # pyupgrade rules
+    "D", # Docstring rules
 ]
 extend-select = ["F401"]
 unfixable = []
