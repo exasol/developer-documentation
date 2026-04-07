@@ -15,7 +15,7 @@ Setting up the db
 -----------------
 
 Our `main
-documentation <https://docs.exasol.com/saas/get_started/saas_first_steps.htm>`__
+documentation <https://docs.exasol.com/db/latest/get_started/saas_first_steps.htm>`__
 shows you how to create a SaaS account and setup your first database and
 cluster.
 
@@ -43,7 +43,7 @@ Connecting to an Exasol database is performed via:
 
 It is slightly different when connecting to a SaaS database as we need a
 `personal access
-token <https://docs.exasol.com/saas/administration/access_mngt/access_token.htm>`__:
+token <https://docs.exasol.com/db/latest/administration/access_mngt/access_token.htm>`__:
 
 .. code:: python
 
