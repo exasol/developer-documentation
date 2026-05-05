@@ -31,7 +31,7 @@ requires = [
 build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
-dev = ["exasol-toolbox>=6.1.1,<7"]
+dev = ["exasol-toolbox>=7.0.0,<8"]
 
 [tool.poetry]
 requires-poetry = ">=2.1.0"
@@ -77,6 +77,9 @@ max-module-lines = 800
 
 [tool.mypy]
 ignore_errors = true
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.8"
 
 [[tool.mypy.overrides]]
 module = [
