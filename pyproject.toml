@@ -25,18 +25,16 @@ repository = "https://github.com/exasol/developer-documentation"
 homepage = "https://github.com/exasol/developer-documentation"
 
 [build-system]
-requires = [
-    "poetry>=2.3.0",
-]
+requires = ["poetry-core>=2.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
 dev = ["exasol-toolbox>=7.0.0,<8"]
 
 [tool.poetry]
-requires-poetry = ">=2.1.0"
-packages  = [
-    {include = "exasol"},
+requires-poetry = ">=2.3.0"
+packages = [
+    { include = "exasol" },
 ]
 
 [tool.coverage.run]
