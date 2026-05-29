@@ -15,3 +15,7 @@
 * #33: Updated to PTB 4.0.0 & dropped support for Python 3.9 (EOL was 2025-10)
 * #50: Updated to PTB 6.1.1 & relocked transitive dependencies
 * #54: Updated to PTB 7.0.0 & relocked transitive dependencies
+
+## Refactoring
+
+* #46: Updated to PTB 8.1.1
