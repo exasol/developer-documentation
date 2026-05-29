@@ -13,3 +13,9 @@ workflows:
             env:
               SONAR_TOKEN: "${{ secrets.SONAR_TOKEN }}"
             run: poetry run -- nox -s sonar:check
+  - name: checks
+    # This is needed because this project does not need `matrix-all.yml` or `matrix-exasol.yml`.
+    # This job will be re-activated in:
+    #   https://github.com/exasol/developer-documentation/issues/57
+    remove_jobs:
+      - check-workflows
