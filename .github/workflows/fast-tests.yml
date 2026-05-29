@@ -1,18 +1,21 @@
-name: Slow-Checks
+# Generated and maintained by the exasol-toolbox.
+# Last generated with exasol-toolbox version 8.1.1.
+name: Fast-Tests
 
 on:
   workflow_call:
 
 jobs:
-  run-integration-tests:
-    name: Run Integration Tests (Python-${{ matrix.python-version }})
+  run-unit-tests:
+    name: Unit Tests (Python-${{ matrix.python-versions }})
     runs-on: "ubuntu-24.04"
     permissions:
       contents: read
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10"]
+        python-versions: ["3.10"]
+
     steps:
       - name: Check out Repository
         id: check-out-repository
@@ -22,17 +25,18 @@ jobs:
         id: set-up-python-and-poetry-environment
         uses: exasol/python-toolbox/.github/actions/python-environment@v8
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python-versions }}
           poetry-version: "2.3.0"
 
-      - name: Run Integration Tests
-        id: run-integration-tests
-        run: poetry run -- nox -s test:integration -- --coverage
+      - name: Run Unit Tests
+        id: run-unit-tests
+        run: poetry run -- nox -s test:unit -- --coverage
 
       - name: Upload Artifacts
         id: upload-artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: coverage-python${{ matrix.python-version }}-slow
+          name: coverage-python${{ matrix.python-versions }}-fast
           path: .coverage
           include-hidden-files: true
+          overwrite: false
