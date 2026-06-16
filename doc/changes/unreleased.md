@@ -19,3 +19,4 @@
 ## Refactoring
 
 * #46: Updated to PTB 8.1.1
+* #57: Updated to PTB 8.2.0 and re-enabled `check-workflows`
