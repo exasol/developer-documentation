@@ -29,7 +29,7 @@ requires = ["poetry-core>=2.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
-dev = ["exasol-toolbox>=9.0.0,<10"]
+dev = ["exasol-toolbox>=10.0.0,<11"]
 
 [tool.poetry]
 requires-poetry = ">=2.3.0"
