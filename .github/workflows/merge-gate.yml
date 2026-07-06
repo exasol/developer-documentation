@@ -1,22 +1,42 @@
+# Generated and maintained by the exasol-toolbox.
+# Last generated with exasol-toolbox version 10.0.0.
 name: Merge-Gate
 
 on:
   workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        required: true
 
 jobs:
-
-  fast-checks:
-    name: Fast
+  run-fast-checks:
+    name: Fast Checks
     uses: ./.github/workflows/checks.yml
     permissions:
       contents: read
 
-  run-slow-tests:
-    name: Run Slow Tests
-    runs-on: ubuntu-24.04
+  run-fast-tests:
+    name: Fast Tests
+    uses: ./.github/workflows/fast-tests.yml
     permissions:
       contents: read
 
+  fast-report:
+    name: Fast Report
+    needs:
+      - run-fast-checks
+      - run-fast-tests
+    uses: ./.github/workflows/report.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    permissions:
+      contents: read
+
+  approve-run-slow-tests:
+    name: Approve Running Slow Tests?
+    runs-on: "ubuntu-24.04"
+    permissions:
+      contents: read
     # Even though the environment "manual-approval" will be created automatically,
     # it still needs to be configured to require interactive review.
     # See project settings on GitHub (Settings / Environments / manual-approval).
@@ -25,25 +45,36 @@ jobs:
       - name: Tests
         run: echo "Slow tests approved"
 
-  slow-checks:
-    name: Slow
-    needs: [ run-slow-tests ]
+  run-slow-checks:
+    name: Slow Checks
+    needs:
+      - approve-run-slow-tests
     uses: ./.github/workflows/slow-checks.yml
-    secrets: inherit
     permissions:
       contents: read
 
+
   # This job ensures inputs have been executed successfully.
-  approve-merge:
+  allow-merge:
     name: Allow Merge
-    runs-on: ubuntu-24.04
+    if: ${{ !cancelled() }}
+    runs-on: "ubuntu-24.04"
     permissions:
       contents: read
     # If you need additional jobs to be part of the merge gate, add them below
-    needs: [ fast-checks, slow-checks ]
-
-    # Each job requires a step, so we added this dummy step.
+    needs:
+      - run-fast-checks
+      - run-fast-tests
+      - run-slow-checks
+    # To prevent accidentally merges, this step is required. For more details
+    # see: https://github.com/exasol/python-toolbox/issues/563
     steps:
-      - name: Approve
+      - name: Branch Protection - failure if any ancestor failed or was cancelled
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
         run: |
-          echo "Merge Approved"
+          echo "$NEEDS_JSON"
+          exit 1
+      - name: branch protection
+        run: echo "All required checks passed. Merge allowed."
