@@ -82,7 +82,7 @@ linkcheck_timeout = 15
 linkcheck_delay = 30
 linkcheck_retries = 2
 linkcheck_anchors = False
-linkcheck_ignore: list[str] = []
+linkcheck_ignore: list[str] = [r"http://localhost:7860"]
 linkcheck_allowed_redirects = {
     # All HTTP redirections from the source URI to
     # the canonical URI will be treated as "working".

@@ -82,7 +82,7 @@ deployment.
 
 It is slightly different when connecting to a SaaS database as we need a
 `personal access
-token <https://docs.exasol.com/saas/administration/access_mngt/access_token.htm>`__:
+token <https://docs.exasol.com/db/latest/administration/access_mngt/access_token.htm>`__:
 
 .. code:: python
 

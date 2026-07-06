@@ -1,36 +1,41 @@
 [project]
 name = "exasol-developer-documentation"
 version = "0.1.0"
-requires-python = ">=3.10,<4.0"
 description = "Documentation and resources for developing software and data science solutions and applications on top of the Exasol Analytics Engine."
+authors = [{ name = "Torsten Kilias", email = "torsten.kilias@exasol.com" }]
+requires-python = ">=3.10,<4.0"
 readme = "README.md"
-authors = [
-    {name="Torsten Kilias", email="torsten.kilias@exasol.com"}
-]
 license = "MIT"
-keywords = ['exasol', 'developer_documentation']
-dynamic = ["dependencies"]
+keywords = [
+    "exasol",
+    "developer_documentation",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = []
 
 [project.urls]
 repository = "https://github.com/exasol/developer-documentation"
 homepage = "https://github.com/exasol/developer-documentation"
 
 [build-system]
-requires = [
-    "poetry>=2.1.0",
-]
+requires = ["poetry-core>=2.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[dependency-groups]
+dev = ["exasol-toolbox>=10.0.0,<11"]
+
 [tool.poetry]
-requires-poetry = ">=2.1.0"
-packages  = [
-    {include = "exasol"},
+requires-poetry = ">=2.3.0"
+packages = [
+    { include = "exasol" },
 ]
-
-[tool.poetry.dependencies]
-
-[tool.poetry.group.dev.dependencies]
-exasol-toolbox = "^4.0.0"
 
 [tool.coverage.run]
 source = [
@@ -39,7 +44,6 @@ source = [
 
 [tool.coverage.report]
 fail_under = 0
-
 
 [tool.black]
 line-length = 88
@@ -52,10 +56,10 @@ force_grid_wrap = 2
 
 [tool.ruff.lint]
 extend-ignore = [
-    "E",      # Syntax errors
-    "F",      # Pyflakes rules (excluding F401)
-    "UP",     # pyupgrade rules
-    "D",      # Docstring rules
+    "E", # Syntax errors
+    "F", # Pyflakes rules (excluding F401)
+    "UP", # pyupgrade rules
+    "D", # Docstring rules
 ]
 extend-select = ["F401"]
 unfixable = []
@@ -70,6 +74,9 @@ max-module-lines = 800
 
 [tool.mypy]
 ignore_errors = true
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.8"
 
 [[tool.mypy.overrides]]
 module = [
