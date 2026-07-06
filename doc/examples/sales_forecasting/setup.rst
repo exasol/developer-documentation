@@ -4,7 +4,7 @@
 Setup
 ======
 
-You will be needing `AI-Lab <https://github.com/exasol/ai-lab>`_ and an Exasol database. You can use the Docker DB that comes with AI-Lab or an onPrem one.
+You will be needing `AI-Lab <https://github.com/exasol/ai-lab>`_ and an Exasol database. You can use the Docker DB that comes with AI-Lab or an onPrem one. A free `Exasol Personal <https://www.exasol.com/personal/>`_ deployment (see :doc:`/getting_started`) also works — connect to it using the On-Prem option.
 
 Once you have finished setting up with `AI-Lab <https://github.com/exasol/ai-lab>`_, we can proceed.
 

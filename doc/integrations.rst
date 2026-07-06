@@ -1,5 +1,5 @@
 Integrations
-============
+=============
 
 SQLAlchemy
 ----------
@@ -17,9 +17,6 @@ Connect to Exasol database using SQLAlchemy
 
     from sqlalchemy import create_engine, text, URL
 
-<<<<<<< HEAD
-Please also refer to `sqlalchemy exasol documentation <https://exasol.github.io/sqlalchemy-exasol/>`_.
-=======
     url_object = URL.create(
         drivername="exa+websocket",
         username="sys",
@@ -35,7 +32,6 @@ Please also refer to `sqlalchemy exasol documentation <https://exasol.github.io/
         result = con.execute(sql_text).fetchall()
 
 Please also refer to the `sqlalchemy-exasol documentation <https://exasol.github.io/sqlalchemy-exasol/>`_.
->>>>>>> b1c87029d51dffe3510a34501af9eb4acbae6b8b
 
 JupySQL
 -------

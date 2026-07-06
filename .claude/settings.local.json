@@ -16,7 +16,15 @@
       "Bash(mv /c/Users/mufa/.claude/skills/exasol-explore /c/Users/mufa/.claude/skills/exasol-developer-guide-creator/)",
       "Bash(mv /c/Users/mufa/.claude/skills/exasol-new /c/Users/mufa/.claude/skills/exasol-developer-guide-creator/)",
       "Bash(mv /c/Users/mufa/.claude/skills/exasol-modify /c/Users/mufa/.claude/skills/exasol-developer-guide-creator/)",
-      "Bash(mv /c/Users/mufa/.claude/skills/exasol-implement /c/Users/mufa/.claude/skills/exasol-developer-guide-creator/)"
+      "Bash(mv /c/Users/mufa/.claude/skills/exasol-implement /c/Users/mufa/.claude/skills/exasol-developer-guide-creator/)",
+      "Bash(mkdir -p /c/Users/mufa/documents/developer-documentation/skills)",
+      "Bash(cp -r /c/Users/mufa/.claude/skills/exasol-developer-guide-creator /c/Users/mufa/documents/developer-documentation/skills/)",
+      "Bash(git -C /c/Users/mufa/.claude/skills/exasol-developer-guide-creator log --oneline)",
+      "Bash(git -C /c/Users/mufa/.claude/skills/exasol-developer-guide-creator remote -v)",
+      "Bash(git:*)",
+      "Skill(browse)",
+      "Bash('C:\\\\Users\\\\mufa/.claude/skills/gstack/browse/dist/browse' status *)",
+      "Bash(awk NR<=3 {print NR\": \"length\\($0\\)} *)"
     ]
   }
 }
