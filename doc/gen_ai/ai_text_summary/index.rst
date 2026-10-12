@@ -56,9 +56,18 @@ Prerequisites
 
 Step 1: Start Exasol Database
 ==============================
-If you don't have an Exasol database running, set one up quickly using Docker. 
+If you don't have an Exasol database running, set one up quickly using Docker.
 Exasol provides a free Docker image for development and testing which supports up to 10GB of data (plenty for this tutorial).
 Full instructions for deploying the Exasol Docker image can be found in the `Exasol Docker repository <https://github.com/exasol/docker-db>`_.
+
+.. note::
+
+   As an alternative to Docker, you can use `Exasol Personal <https://www.exasol.com/personal/>`_ —
+   a completely free, full-featured edition of Exasol that you can install locally (macOS) or in
+   your own cloud with a single command, with no limits on data size. Like the Docker setup, your
+   data never leaves your own infrastructure, which fits the self-hosted approach of this tutorial.
+   See :doc:`/getting_started` for setup instructions. The default local credentials (``sys`` / ``exasol``)
+   are the same as for the Docker image.
 
 Run Exasol in Docker:
 

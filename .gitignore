@@ -147,3 +147,9 @@ itde/
 
 # Emacs
 TAGS
+
+# AI agent tooling (Claude Code, Serena, gstack)
+.claude/
+.serena/
+.gstack/
+/skills
