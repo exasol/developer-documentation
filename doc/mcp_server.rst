@@ -50,7 +50,7 @@ Prerequisites
 
 Before getting started, ensure you have:
 
-* Python 3.10 or higher
+* Python 3.11 or higher
 * An MCP Client application (e.g., `Claude Desktop <https://claude.com/download>`__)
 * The ``uv`` package manager
 

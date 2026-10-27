@@ -3,7 +3,7 @@ name = "exasol-developer-documentation"
 version = "0.1.0"
 description = "Documentation and resources for developing software and data science solutions and applications on top of the Exasol Analytics Engine."
 authors = [{ name = "Torsten Kilias", email = "torsten.kilias@exasol.com" }]
-requires-python = ">=3.10,<4.0"
+requires-python = ">=3.11,<3.15"
 readme = "README.md"
 license = "MIT"
 keywords = [
@@ -12,7 +12,6 @@ keywords = [
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
