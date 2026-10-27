@@ -270,4 +270,4 @@ Feedback
 
 * Contact us on the `Exasol Community <https://community.exasol.com/>`__
 
-*Last updated: February 2026*
+*Last updated: October 2026*
