@@ -50,7 +50,7 @@ Prerequisites
 
 Before getting started, ensure you have:
 
-* Python 3.10 or higher
+* Python 3.11 or higher
 * An MCP Client application (e.g., `Claude Desktop <https://claude.com/download>`__)
 * The ``uv`` package manager
 
@@ -270,4 +270,4 @@ Feedback
 
 * Contact us on the `Exasol Community <https://community.exasol.com/>`__
 
-*Last updated: February 2026*
+*Last updated: October 2026*
